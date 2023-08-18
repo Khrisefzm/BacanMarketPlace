@@ -3,7 +3,7 @@ import React from "react";
 export const AddProductForm = () => {
     return (
         <div className="container">
-            <h1>Añadir producto:</h1>
+            <h1 className="text-center">Añadir producto</h1>
             <form>
                 {/* primera Fila */}
                 <div className="row">
@@ -63,7 +63,9 @@ export const AddProductForm = () => {
                         </div>
                     </div>
                     <div className="col">
-                        <label className="form-label">Medios de pago:</label>
+                        <div>
+                            <label className="form-label">Medios de pago:</label>
+                        </div>
                         <div className="form-check form-check-inline">
                             <input className="form-check-input" type="checkbox" value="option1" defaultChecked />
                             <label className="form-check-label">Tarjeta de crédito</label>
@@ -78,12 +80,18 @@ export const AddProductForm = () => {
                         </div>
                     </div>
                 </div>
+                {/* Cuart Fila */}
                 <div className="mb-3">
                     <label className="form-label">Intercambio por:</label>
                     <div className="input-group mb-3">
                         <input type="text" className="form-control" />
                         <button className="btn btn-outline-secondary" type="button" id="button-addon2">+</button>
                     </div>
+                </div>
+                {/* Quinta Fila */}
+                <div className="mb-3">
+                    <label className="form-label">Imagen del producto</label>
+                    <input className="form-control" type="file" />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Description: </label>
