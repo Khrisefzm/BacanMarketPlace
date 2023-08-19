@@ -1,14 +1,110 @@
-/*
-    home.css: This website contains selectors only used in home.css
+/* En tu archivo home.css */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f9fa;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
-img{
+.video-container {
+    width: 50%;
+}
+
+
+.text-container {
+    width: 100%;
+    padding: 60px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.description {
+    font-size: 1.25rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.video-container {
     width: 100%;
 }
-.imgProductDetails{
-    max-width: 300px;
-    padding: auto;
+
+.video-container video {
+    width: 100%;
+    height: auto;
+}
+
+/* Estilos para la sección de Beneficios */
+.benefits-container {
+    width: 100%;
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+
+.benefits-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.benefit-item {
+    text-align: center;
+    padding: 20px;
+}
+
+.benefit-item i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #f39c12;
+}
+
+/* Estilos para la sección del Equipo */
+.team-container {
+    width: 100%;
+    padding: 60px 0;
+    background-color: #ffffff;
+}
+
+.team-members {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.team-member {
+    text-align: center;
+    padding: 20px;
+}
+
+.team-member img {
+    max-width: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.team-member h3 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    color: #333333;
+}
+
+.team-member p {
+    font-size: 1rem;
+    color: #666666;
+}
+
+.round-image {
+    border-radius: 50%;
+    max-width: 100px; /* Ajusta el valor según el tamaño deseado */
+    width: 100%; /* Para asegurarse de que la imagen ocupe todo el espacio */
+    height: auto; /* Para mantener la proporción de la imagen */
+    object-fit: cover; /* Ajusta la imagen para que llene el contenedor y mantiene su relación de aspecto */
 }
