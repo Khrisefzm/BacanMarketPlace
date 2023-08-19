@@ -5,6 +5,7 @@ import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
+import { Registro } from "./pages/registro.jsx"
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
@@ -30,6 +31,7 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
+                        <Route element={<Registro />} path="/registro" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<ProductPage />} path="/product" />
                         <Route element={<CheckOut />} path="/checkout" />
