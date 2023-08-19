@@ -9,6 +9,11 @@
     margin: 0;
 }
 
+.video-container {
+    width: 50%;
+}
+
+
 .text-container {
     width: 100%;
     padding: 60px;
@@ -94,4 +99,12 @@
 .team-member p {
     font-size: 1rem;
     color: #666666;
+}
+
+.round-image {
+    border-radius: 50%;
+    max-width: 100px; /* Ajusta el valor según el tamaño deseado */
+    width: 100%; /* Para asegurarse de que la imagen ocupe todo el espacio */
+    height: auto; /* Para mantener la proporción de la imagen */
+    object-fit: cover; /* Ajusta la imagen para que llene el contenedor y mantiene su relación de aspecto */
 }
