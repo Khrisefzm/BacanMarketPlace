@@ -34,9 +34,9 @@ export const ProductView = () => {
                     <h2>Descripción</h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores fugit quae sunt unde officiis aperiam eligendi doloribus ut adipisci perferendis velit esse, quas, voluptas dolorum, cum recusandae animi dolor asperiores.</p>
                     <div className="d-flex flex-row">
-                        <button type="button" class="btn btn-success">Añadir al Carrito</button>
-                        <button type="button" class="btn btn-warning mx-4">Comprar ahora</button>
-                        <button type="button" class="btn btn-success">Ofrecer intercambio</button>
+                        <button type="button" className="btn btn-success">Añadir al Carrito</button>
+                        <button type="button" className="btn btn-warning mx-4">Comprar ahora</button>
+                        <button type="button" className="btn btn-success">Ofrecer intercambio</button>
                     </div>
                 </div>
             </div>
