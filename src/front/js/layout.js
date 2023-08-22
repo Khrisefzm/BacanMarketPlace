@@ -16,6 +16,7 @@ import { Footer } from "./component/footer";
 import { ProductPage } from "./pages/productPage.js";
 import { CheckOut } from "./pages/CheckOut.jsx";
 import { AddProductForm } from "./pages/AddProductForm.jsx";
+import { ExchangeProductos } from "./pages/ExchangeProducts.jsx";
 
 //create your first component
 const Layout = () => {
@@ -39,6 +40,7 @@ const Layout = () => {
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<ProductPage />} path="/product" />
                         <Route element={<CheckOut />} path="/checkout" />
+                        <Route element={<ExchangeProductos/> } path="/exchange" />
                         <Route element={<AddProductForm />} path="/add-product" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
