@@ -17,6 +17,7 @@ import { ProductPage } from "./pages/productPage.js";
 import { CheckOut } from "./pages/CheckOut.jsx";
 import { AddProductForm } from "./pages/AddProductForm.jsx";
 import { ExchangeProductos } from "./pages/ExchangeProducts.jsx";
+import { ComfirmExchange } from "./pages/ComfirmExchange.jsx";
 
 //create your first component
 const Layout = () => {
@@ -41,6 +42,7 @@ const Layout = () => {
                         <Route element={<ProductPage />} path="/product" />
                         <Route element={<CheckOut />} path="/checkout" />
                         <Route element={<ExchangeProductos/> } path="/exchange" />
+                        <Route element={<ComfirmExchange /> } path="/comfirm-exchange" />
                         <Route element={<AddProductForm />} path="/add-product" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
