@@ -7,6 +7,8 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     user_name = db.Column(db.String(120), unique=True, nullable=False)
     cellphone = db.Column(db.Integer, unique=True, nullable=False)
+    country = db.Column(db.String(120), unique=True, nullable=False)
+    city = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(300), unique=False, nullable=False)
     # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
@@ -19,5 +21,7 @@ class User(db.Model):
             "email": self.email,
             "user_name" : self.user_name,
             "cellphone" : self.cellphone,
+            "country" : self.country,
+            "city" : self.city,
             # do not serialize the password, its a security breach
         }
