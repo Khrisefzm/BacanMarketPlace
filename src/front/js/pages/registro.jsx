@@ -5,22 +5,56 @@ export const Registro = () => {
     const [formInfo, setFormInfo] = useState({
         email: "",
         user_name: "",
-        cellphone: "",
+        cellphone: 0,
+        country: "",
+        city: "",
         password: "",
-    })
+    });
 
-    function changeInput(e) {
-        setFormInfo({ ...formInfo, [e.target.name]: e.target.value })
-    }
+    const [comfirmPassword, setComfirmPassword] = useState("");
 
-    function sentForm(e) {
+    const changeInput = e => {
+        setFormInfo({ ...formInfo, [e.target.name]: e.target.value });
+    };
+
+    const changePasswordInput = e => {
+        setComfirmPassword(e.target.value);
+    };
+
+    const sentForm = e => {
+        e.preventDefault();
+        console.log(formInfo)
+        if (comfirmPassword === formInfo.password) {
+            fetch(process.env.BACKEND_URL + "/api/singup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formInfo)
+            })
+                .then(response => {
+                    if (!res.ok) throw Error(res.statusText);
+
+                    if (resp.status === 401) {
+                        console.log("Invalid credentials")
+                    }
+                    else if (resp.status === 400) {
+                        console.log("Invalid email or password format")
+                    }
+                    return response.json();
+                })
+                .then(data => { response.json(data) })
+                .catch(error => console.log(error));
+        } else {
+            console.log("las contraseñas no coinciden")
+        }
 
     }
 
     return (
         <div className="container-fluid">
             <div className="col-lg-6 col-md-8 col-sm-11 border rounded p-3 my-3 mx-auto">
-                <form action="" className="form">
+                <form onSubmit={sentForm}>
                     <h1 className="text-center mb-4">Registro</h1>
                     <div className="mb-3">
                         <label className="form-label">Correo Electrónico: </label>
@@ -32,25 +66,25 @@ export const Registro = () => {
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Número de teléfono: </label>
-                        <input type="number" className="form-control" required />
+                        <input type="number" className="form-control" name="cellphone" onChange={changeInput} required />
                     </div>
                     <div className="row mb-3">
                         <div className="col-lg-6 col-md-6 col-sm-12">
                             <label className="form-label">País: </label>
-                            <input type="text" className="form-control" required />
+                            <input type="text" className="form-control" name="country" onChange={changeInput} required />
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-12">
                             <label className="form-label">Ciudad: </label>
-                            <input type="text" className="form-control" required />
+                            <input type="text" className="form-control" name="city" onChange={changeInput} required />
                         </div>
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Contraseña:</label>
-                        <input type="password" className="form-control" required />
+                        <input type="password" className="form-control" name="password" onChange={changeInput} required />
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Confirmar contraseña:</label>
-                        <input type="password" className="form-control" required />
+                        <input type="password" className="form-control" onChange={changePasswordInput} required />
                     </div>
                     <button type="submit" className="btn btn-warning">Registrarse</button>
                 </form>
