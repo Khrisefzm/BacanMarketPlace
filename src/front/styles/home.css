@@ -70,24 +70,41 @@
 .team-container {
     width: 100%;
     padding: 60px 0;
-    background-color: #ffffff;
+    background-color: #f9f9f9;
+    text-align: center;
 }
 
-.team-members {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
 }
 
 .team-member {
     text-align: center;
     padding: 20px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px;
+    transition: transform 0.2s ease-in-out;
+    display: inline-block;
+    width: calc(33.33% - 20px); /* Ajustar el ancho según el número de columnas */
+    vertical-align: top;
+    box-sizing: border-box;
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .team-member img {
-    max-width: 100px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     margin-bottom: 10px;
+    object-fit: cover;
+    border: 2px solid #ddd;
 }
 
 .team-member h3 {
@@ -101,10 +118,114 @@
     color: #666666;
 }
 
-.round-image {
-    border-radius: 50%;
-    max-width: 100px; /* Ajusta el valor según el tamaño deseado */
-    width: 100%; /* Para asegurarse de que la imagen ocupe todo el espacio */
-    height: auto; /* Para mantener la proporción de la imagen */
-    object-fit: cover; /* Ajusta la imagen para que llene el contenedor y mantiene su relación de aspecto */
+.title-cards-servicios {
+    padding: 40px 0;
+}
+
+/* Estilo para el título h2 */
+.title-cards-servicios {
+    font-size: 2rem;
+    margin: 50px 0; /* Ajusta el margen superior e inferior según tus preferencias */
+    color: white; /* Cambia el color del texto según tus preferencias */
+    background: linear-gradient(135deg, #ff9800, #ff4500); /* Cambia los colores del gradiente según tus preferencias */
+    padding: 10px 20px; /* Ajusta el espacio alrededor del texto */
+    display: inline-block;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: left; /* Coloca el texto a la izquierda */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Agrega un efecto de sombra al texto */
+}
+
+/*Carousel servicios*/
+
+/* Estilos para los carouseles */
+.carousel-inner img {
+    width: 100%;
+    height: 300px; /* Ajusta la altura según tu preferencia */
+    object-fit: cover;
+}
+
+/* Estilos para los contenedores de las tarjetas */
+.container-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin: 50px;
+}
+
+/* Estilos para las tarjetas */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin: 50px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contenido-card {
+    margin-top: 20px;
+}
+
+/* Estilos para los botones */
+.btn {
+    background-color: #f59f00;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #d18300;
+}
+
+/* Resto de los estilos de las tarjetas */
+
+
+
+
+/* Estilo para el título h2 con efecto innovador */
+.section-title-team {
+    font-size: 2rem;
+    margin: 20px 0;
+    color: white; /* Cambia el color del texto según tus preferencias */
+    background: linear-gradient(135deg, #ff9800, #ff4500); /* Cambia los colores del gradiente según tus preferencias */
+    padding: 10px 20px; /* Ajusta el espacio alrededor del texto */
+    display: inline-block;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center; /* Centra el texto horizontalmente */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Agrega un efecto de sombra al texto */
+}
+
+
+/* Estilo para el título h2 con efecto innovador */
+.section-title-benefits {
+    font-size: 2rem;
+    margin: 20px 0;
+    color: white; /* Cambia el color del texto según tus preferencias */
+    background: linear-gradient(135deg, #ff9800, #ff4500); /* Cambia los colores del gradiente según tus preferencias */
+    padding: 10px 20px; /* Ajusta el espacio alrededor del texto */
+    display: inline-block;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center; /* Centra el texto horizontalmente */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Agrega un efecto de sombra al texto */
+}
+
+/* Estilo para los beneficios */
+.benefit-item i {
+    font-size: 5rem; /* Ajusta el tamaño del ícono según tus preferencias */
+    margin: 20px;
+    color: #ff9800; /* Cambia el color del ícono según tus preferencias */
 }

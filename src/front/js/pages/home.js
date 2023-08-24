@@ -32,45 +32,81 @@ export const Home = () => {
                     </p>
                 </div>
             </div>
-            
-            <div className="title-cards">
-                <h2>Servicios que Ofrecemos</h2>
+
+{/* ... Inicio sección Marketplace ... */}
+            <div className="title-cards-servicios">
+                <h2>Categorias del Marketplace</h2>
             </div>
             <div className="row container-card">
                 <div className="card col">
-                    <figure>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRZ9DMNFHxwZcfPXJrJeBMITxPMP3FMZk_ixXzTfzt4G_C-G058" alt="Diseño Gráfico" />
-                    </figure>
+                    <div id="carouselCategoria1" className="carousel slide" data-ride="carousel">
+                        <div className="carousel-inner">
+                            <div className="carousel-item active">
+                                <img src="https://wmagazin.com/wp-content/uploads/2022/12/Portada-Caperucitaroja-WMagazin-e1672189455210.jpg" className="d-block w-100" alt="Categoría 1" />
+                            </div>
+                            <div className="carousel-item">
+                                <img src="https://wmagazin.com/wp-content/uploads/2022/12/Portada-Lashorashanperdidosureloj-WMagazin-e1672189589284.jpg" className="d-block w-100" alt="Categoría 2" />
+                            </div>
+                            <div className="carousel-item">
+                                <img src="https://wmagazin.com/wp-content/uploads/2022/12/Portada-Laleydelmashombre-WMagazin-e1672189675551.jpg" className="d-block w-100" alt="Categoría 3" />
+                            </div>
+                            <div className="carousel-item">
+                                <img src="https://wmagazin.com/wp-content/uploads/2022/12/Portada-Elsol-WMagazin-scaled-e1672190074681.jpg" className="d-block w-100" alt="Categoría 4" />
+                            </div>
+                        </div>
+                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselCategoria1" data-bs-slide="prev">
+                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span className="visually-hidden">Previous</span>
+                        </button>
+                        <button className="carousel-control-next" type="button" data-bs-target="#carouselCategoria1" data-bs-slide="next">
+                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span className="visually-hidden">Next</span>
+                        </button>
+                    </div>
                     <div className="contenido-card">
-                        <h3>Diseño Gráfico</h3>
-                        <p>Podemos crear la identidad corporativa de tu empresa. Diseño, Maquetación de folletos, Catálogos, Papelería y mucho más.</p>
-                        <a href="#">Leer Más</a>
+                        <h3>Compra lo que más te guste</h3>
+                        <p>Encuentra una gran variedad de libros de diferentes autores y categorias, ofrecidos por nuestros usuarios</p>
+                        <button type="button" class="btn btn-warning">Compra</button>
                     </div>
                 </div>
+                
                 <div className="card col">
-                    <figure>
-                        <img src="https://colmayorbolivar.edu.co/blog/wp-content/uploads/2017/06/imagen-administracion.jpg" alt="Gestión de Redes" />
-                    </figure>
-                    <div className="contenido-card">
-                        <h3>Gestión de Redes</h3>
-                        <p>Nosotros creamos y optimizamos tus perfiles en las Redes Sociales. Importantes para que tu presencia online sea completa.</p>
-                        <a href="#">Leer Más</a>
+                    <div id="carouselCategoria2" className="carousel slide" data-ride="carousel">
+                        <div className="carousel-inner">
+                            <div className="carousel-item active">
+                                <img src="https://wmagazin.com/wp-content/uploads/2022/12/Portada-Caperucitaroja-WMagazin-e1672189455210.jpg" className="d-block w-100" alt="Categoría 1" />
+                            </div>
+                            <div className="carousel-item">
+                                <img src="https://wmagazin.com/wp-content/uploads/2022/12/Portada-Lashorashanperdidosureloj-WMagazin-e1672189589284.jpg" className="d-block w-100" alt="Categoría 2" />
+                            </div>
+                            <div className="carousel-item">
+                                <img src="https://wmagazin.com/wp-content/uploads/2022/12/Portada-Laleydelmashombre-WMagazin-e1672189675551.jpg" className="d-block w-100" alt="Categoría 3" />
+                            </div>
+                            <div className="carousel-item">
+                                <img src="https://wmagazin.com/wp-content/uploads/2022/12/Portada-Elsol-WMagazin-scaled-e1672190074681.jpg" className="d-block w-100" alt="Categoría 4" />
+                            </div>
+                        </div>
+                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselCategoria2" data-bs-slide="prev">
+                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span className="visually-hidden">Previous</span>
+                        </button>
+                        <button className="carousel-control-next" type="button" data-bs-target="#carouselCategoria2" data-bs-slide="next">
+                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span className="visually-hidden">Next</span>
+                        </button>
                     </div>
-                </div>
-                <div className="card col">
-                    <figure>
-                        <img src="https://image.freepik.com/foto-gratis/desarrollo-programadores-desarrollo-tecnologias-diseno-codificacion-sitios-web_18497-1090.jpg" alt="Desarrollo Web" />
-                    </figure>
                     <div className="contenido-card">
-                        <h3>Desarrollo Web</h3>
-                        <p>Creamos tu página web utilizando las últimas tecnologías disponibles. Una Web adaptativa a tu móvil o Tablet y con un gestor de contenido fácil.</p>
-                        <a href="#">Leer Más</a>
+                        <h3>Intercambia libros!!!</h3>
+                        <p>En Bacan Market puedes intercambiar los libros que ya terminaste de leer por otro que no lo leiste. ¿Quieres ver cuales estan disponibles? Ingresa ya!!!</p>
+                        <button type="button" class="btn btn-warning">Intercambia</button>
                     </div>
                 </div>
             </div>
+            
+{/* ... Fin sección Marketplace ... */}
 
             <div className="benefits-container">
-                <h2 className="section-title">Beneficios de comprar en nuestra página</h2>
+                <h2 className="section-title-benefits">Beneficios de comprar en nuestra página</h2>
                 <div className="row">
                     <div className="col-md-4 benefit-item">
                         <i className="fas fa-shipping-fast"></i>
@@ -87,10 +123,10 @@ export const Home = () => {
                 </div>
             </div>
             <div className="team-container">
-                <h2 className="section-title">Equipo de Bacan Market Team</h2>
+                <h2 className="section-title-team">Equipo de Bacan Market Team</h2>
                 <div className="row">
                     <div className="col-md-4 team-member">
-                        <img src="https://i.imgur.com/xYZEAS8.jpg" alt="Miembro del equipo 1" className="round-image" />
+                        <img src="https://i.imgur.com/jqB9nlU.jpg" alt="Miembro del equipo 1" className="round-image" />
                         <h3>Franchezca</h3>
                         <p>Team Leader del proyecto</p>
                     </div>
@@ -100,7 +136,7 @@ export const Home = () => {
                         <p>Encargado de mejorar tu experiencia en el uso de la plataforma</p>
                     </div>
                     <div className="col-md-4 team-member">
-                        <img src="https://i.imgur.com/WFBQLho.jpg" alt="Brian" className="round-image" />
+                        <img src="https://i.imgur.com/Y6SNcjE.jpg" alt="Brian" className="round-image" />
                         <h3>Brian</h3>
                         <p>Encargado de Reclutar al Mejor Talento para estar a tu servicio...</p>
                     </div>
