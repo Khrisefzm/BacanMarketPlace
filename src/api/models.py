@@ -6,8 +6,10 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     user_name = db.Column(db.String(120), unique=True, nullable=False)
-    cellphone = db.Column(db.Integer, unique=True, nullable=False)
-    password = db.Column(db.String(120), unique=False, nullable=False)
+    cellphone = db.Column(db.BigInteger, unique=True, nullable=False)
+    country = db.Column(db.String(120), unique=False, nullable=False)
+    city = db.Column(db.String(120), unique=False, nullable=False)
+    password = db.Column(db.String(300), unique=False, nullable=False)
     # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     seller_product = db.relationship("SellerProduct", backref = "user", lazy = True)
     exchange_product = db.relationship("ExchangeProduct", backref = "user", lazy = True)
@@ -21,6 +23,8 @@ class User(db.Model):
             "email": self.email,
             "user_name" : self.user_name,
             "cellphone" : self.cellphone,
+            "country" : self.country,
+            "city" : self.city,
             # do not serialize the password, its a security breach
         }
     
