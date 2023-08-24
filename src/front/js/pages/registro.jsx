@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Registro = () => {
 
@@ -12,6 +13,8 @@ export const Registro = () => {
     });
 
     const [comfirmPassword, setComfirmPassword] = useState("");
+
+    const navigate = useNavigate();
 
     const changeInput = e => {
         setFormInfo({ ...formInfo, [e.target.name]: e.target.value });
@@ -33,17 +36,18 @@ export const Registro = () => {
                 body: JSON.stringify(formInfo)
             })
                 .then(response => {
-                    if (!res.ok) throw Error(res.statusText);
+                    if (!response.ok) console.log("there was an error")
+                    else navigate("/login") //throw Error(response.statusText);
 
-                    if (resp.status === 401) {
+                    if (response.status === 401) {
                         console.log("Invalid credentials")
                     }
-                    else if (resp.status === 400) {
+                    else if (response.status === 400) {
                         console.log("Invalid email or password format")
                     }
                     return response.json();
                 })
-                .then(data => { response.json(data) })
+                .then(data => { console.log(data) })
                 .catch(error => console.log(error));
         } else {
             console.log("las contraseñas no coinciden")

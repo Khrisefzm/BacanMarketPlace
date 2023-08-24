@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_bcrypt import Bcrypt
+from flask_cors import cross_origin
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -13,6 +14,7 @@ api = Blueprint('api', __name__)
 
 
 @api.route('/singup', methods=['POST'])
+@cross_origin()
 def create_user():
     email = request.json.get("email", None)
     user_name = request.json.get("user_name", None)
