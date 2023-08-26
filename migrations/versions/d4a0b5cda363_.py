@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 1519f934a4fb
+Revision ID: d4a0b5cda363
 Revises: 
-Create Date: 2023-08-24 01:20:33.464922
+Create Date: 2023-08-26 00:42:14.080170
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '1519f934a4fb'
+revision = 'd4a0b5cda363'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,7 +21,7 @@ def upgrade():
     op.create_table('product',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=False),
-    sa.Column('type', sa.String(length=120), nullable=False),
+    sa.Column('product_type', sa.String(length=120), nullable=True),
     sa.Column('category', sa.String(length=50), nullable=False),
     sa.Column('author', sa.String(length=120), nullable=False),
     sa.Column('description', sa.String(length=255), nullable=False),
@@ -31,7 +31,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('email', sa.String(length=120), nullable=False),
     sa.Column('user_name', sa.String(length=120), nullable=False),
-    sa.Column('cellphone', sa.Integer(), nullable=False),
+    sa.Column('cellphone', sa.BigInteger(), nullable=False),
     sa.Column('country', sa.String(length=120), nullable=False),
     sa.Column('city', sa.String(length=120), nullable=False),
     sa.Column('password', sa.String(length=300), nullable=False),
@@ -42,6 +42,9 @@ def upgrade():
     )
     op.create_table('exchange_product',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('interested_product_one', sa.String(length=120), nullable=False),
+    sa.Column('interested_product_two', sa.String(length=120), nullable=True),
+    sa.Column('interested_product_three', sa.String(length=120), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('product_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['product_id'], ['product.id'], ),
@@ -50,6 +53,7 @@ def upgrade():
     )
     op.create_table('seller_product',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('price', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('product_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['product_id'], ['product.id'], ),
