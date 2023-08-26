@@ -19,7 +19,7 @@ export const Navbar = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/demo" className="nav-link">
+                            <Link to="/login" className="nav-link">
                                 <button className="btn btn-outline-warning">Login</button>
                             </Link>
                         </li>
