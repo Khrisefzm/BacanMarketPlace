@@ -51,4 +51,21 @@ def post_get_product():
         print(products)
         return list(map(lambda element : element.serialize(), products)), 200
     
+@api.route('/products/<int:id>', methods=['GET','PUT'])
+@cross_origin()
+def single_product(id):
+    if request.method == 'GET':
+        product = Product.query.get(id)
+        return jsonify(product.serialize()), 200
+    else :
+        product = Product.query.get(id)
+        product.name = request.json.get("name", product.name)
+        product.product_type = request.json.get("product_type", product.product_type)
+        product.category = request.json.get("category", product.category)
+        product.author = request.json.get("author", product.author)
+        product.description = request.json.get("description", product.description)
+        db.session.add(product)
+        db.session.commit()
+        return jsonify(product.serialize()), 200
+
         
