@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; 
 
 export const Login = () => {
     return (
@@ -14,8 +15,13 @@ export const Login = () => {
                         <label className="form-label">Contraseña:</label>
                         <input type="password" className="form-control" />
                     </div>
-                    <button type="submit" className="btn btn-primary">Registrarse</button>
+                    <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
+                    <div className="mt-3">
+                        <p className="text-center">¿No te registraste? <Link to="/registro">Registrate aquí</Link></p>
+                        <p className="text-center">Olvidé mi contraseña <Link to="/password">recupérala aquí</Link></p>
+                    </div>
                 </form>
+
             </div>
         </div>
     )
