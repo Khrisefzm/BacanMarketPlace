@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const ProductView = () => {
     return (
@@ -27,16 +28,13 @@ export const ProductView = () => {
                         <div className="ms-3 mb-2 border border-primary rounded-pill">
                             <p className="text-primary my-0 mx-2">La ciudad de los perros</p>
                         </div>
-                        <div className="ms-3 mb-2 border border-primary rounded-pill">
-                            <p className="text-primary my-0 mx-2">La sombra del viento</p>
-                        </div>
                     </div>
                     <h2>Descripción</h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores fugit quae sunt unde officiis aperiam eligendi doloribus ut adipisci perferendis velit esse, quas, voluptas dolorum, cum recusandae animi dolor asperiores.</p>
                     <div className="d-flex flex-row">
-                        <button type="button" className="btn btn-success">Añadir al Carrito</button>
-                        <button type="button" className="btn btn-warning mx-4">Comprar ahora</button>
-                        <button type="button" className="btn btn-success">Ofrecer intercambio</button>
+                        <Link to="/exchange">
+                            <button type="button" className="btn btn-success">Ofrecer intercambio</button>
+                        </Link>
                     </div>
                 </div>
             </div>
