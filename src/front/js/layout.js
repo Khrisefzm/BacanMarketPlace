@@ -12,12 +12,14 @@ import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
+import { NavBarNew } from "./component/NavBarNew";
 import { Footer } from "./component/footer";
 import { ProductPage } from "./pages/productPage.js";
 import { CheckOut } from "./pages/CheckOut.jsx";
 import { AddProductForm } from "./pages/AddProductForm.jsx";
 import { ExchangeProductos } from "./pages/ExchangeProducts.jsx";
 import { ComfirmExchange } from "./pages/ComfirmExchange.jsx";
+import EcommerceMain from "./pages/EcommerceMain";
 
 //create your first component
 const Layout = () => {
@@ -44,6 +46,7 @@ const Layout = () => {
                         <Route element={<ExchangeProductos/> } path="/exchange" />
                         <Route element={<ComfirmExchange /> } path="/comfirm-exchange" />
                         <Route element={<AddProductForm />} path="/add-product" />
+                        <Route element={<EcommerceMain />} path="/emain" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
