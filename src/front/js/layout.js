@@ -12,7 +12,6 @@ import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
-import { NavBarNew } from "./component/NavBarNew";
 import { Footer } from "./component/footer";
 import { ProductPage } from "./pages/productPage.js";
 import { CheckOut } from "./pages/CheckOut.jsx";
@@ -27,7 +26,7 @@ const Layout = () => {
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
 
-    if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL/ >;
+    if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
     return (
         <div>
@@ -43,8 +42,8 @@ const Layout = () => {
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<ProductPage />} path="/product" />
                         <Route element={<CheckOut />} path="/checkout" />
-                        <Route element={<ExchangeProductos/> } path="/exchange" />
-                        <Route element={<ComfirmExchange /> } path="/comfirm-exchange" />
+                        <Route element={<ExchangeProductos />} path="/exchange" />
+                        <Route element={<ComfirmExchange />} path="/comfirm-exchange" />
                         <Route element={<AddProductForm />} path="/add-product" />
                         <Route element={<EcommerceMain />} path="/emain" />
                         <Route element={<h1>Not found!</h1>} />
