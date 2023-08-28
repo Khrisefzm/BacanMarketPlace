@@ -12,6 +12,7 @@ import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
+import { NavBarNew } from "./component/NavBarNew";
 import { Footer } from "./component/footer";
 import { ProductPage } from "./pages/productPage.js";
 import { CheckOut } from "./pages/CheckOut.jsx";
