@@ -1,7 +1,10 @@
 import React from "react";
+import { NavBarNew } from "../component/NavBarNew";
 
 export const AddProductForm = () => {
     return (
+        <>
+        <NavBarNew />
         <div className="container">
             <h1 className="text-center">Añadir producto</h1>
             <form>
@@ -100,5 +103,7 @@ export const AddProductForm = () => {
                 <button type="submit" className="btn btn-primary">Añadir producto</button>
             </form>
         </div>
+        </>
+        
     );
 };

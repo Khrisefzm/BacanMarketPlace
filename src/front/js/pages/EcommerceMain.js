@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
+import { NavBarNew } from "../component/NavBarNew.js";
 
 const EcommerceMain = () => {
     const [showDonationModal, setShowDonationModal] = useState(false);
@@ -169,49 +170,53 @@ const EcommerceMain = () => {
             category: "Terror",
             user: "Usuario2"
         },
-        
+
     ];
 
     return (
-        <div className="container mt-5">
-            <div className="row">
-                {products.map(product => (
-                    <div className="col-md-4 mb-4" key={product.id}>
-                        <div className="card">
-                            <img src={`/front/img/${product.image}`} className="card-img-top" alt={product.name} />
-                            <div className="card-body">
-                                <h5 className="card-title">{product.name}</h5>
-                                <p className="card-text">Categoría: {product.category}</p>
-                                <p className="card-text">Usuario: {product.user}</p>
-                                <Link to={`/intercambio/${product.id}`} className="btn btn-primary">Intercambiar</Link>
+        <>
+            <NavBarNew />
+            <div className="container mt-5">
+                <div className="row">
+                    {products.map(product => (
+                        <div className="col-md-4 mb-4" key={product.id}>
+                            <div className="card">
+                                <img src={`/front/img/${product.image}`} className="card-img-top" alt={product.name} />
+                                <div className="card-body">
+                                    <h5 className="card-title">{product.name}</h5>
+                                    <p className="card-text">Categoría: {product.category}</p>
+                                    <p className="card-text">Usuario: {product.user}</p>
+                                    <Link to={`/product/${product.id}`} className="btn btn-primary">Intercambiar</Link>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
+                <Button
+                    style={donationButtonStyle}
+                    onClick={toggleDonationModal}
+                >
+                    Donación
+                </Button>
+                <Modal show={showDonationModal} onHide={toggleDonationModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Donación</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Su donación es importante para seguir ayudando a la comunidad a poder seguir intercambiando libros para ampliar su conocimiento.
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={toggleDonationModal}>
+                            Cerrar
+                        </Button>
+                        <Button variant="primary">
+                            Donar
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
-            <Button
-                style={donationButtonStyle}
-                onClick={toggleDonationModal}
-            >
-                Donación
-            </Button>
-            <Modal show={showDonationModal} onHide={toggleDonationModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Donación</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    Su donación es importante para seguir ayudando a la comunidad a poder seguir intercambiando libros para ampliar su conocimiento.
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={toggleDonationModal}>
-                        Cerrar
-                    </Button>
-                    <Button variant="primary">
-                        Donar
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </div>
+        </>
+
     );
 };
 
