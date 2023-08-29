@@ -6,7 +6,10 @@ from api.models import db, User, Product, SellerProduct, ExchangeProduct
 from api.utils import generate_sitemap, APIException
 from flask_bcrypt import Bcrypt
 from flask_cors import cross_origin
-import json
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -31,6 +34,26 @@ def create_user():
     db.session.commit()
     jsonify(new_user.serialize())
     return "200"
+
+@api.route('/token', methods = ['POST'])
+def token():
+    user = request.json.get("user_name", None)
+    password = request.json.get("password", None)
+    # comprobar el hash
+    pw_hash = bcrypt.generate_password_hash(password)
+    print(pw_hash)
+
+    user_from_db = User.query.filter_by(user_name=user).one_or_none()
+    if not user_from_db :
+        return jsonify("El usuario no existe"), 401
+    
+    password_from_db = user_from_db.password
+    print(password_from_db)
+    if not bcrypt.check_password_hash(password_from_db, password):
+        return jsonify("La contraseña no es correcta"), 401
+
+    access_token = create_access_token(identity=user_from_db)
+    return jsonify(access_token=access_token)
 
 @api.route('/products', methods=['POST', 'GET'])
 @cross_origin()

@@ -11,8 +11,7 @@ from api.models import db, User,Product,SellerProduct,ExchangeProduct
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
-
-# Flask jwt
+# Flask jwt extended
 from flask_jwt_extended import JWTManager
 
 #from models import Person
