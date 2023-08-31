@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import "../../styles/home.css";
 import { Navbar } from "../component/navbar.jsx";
 
-
 export const Home = () => {
     const { store, actions } = useContext(Context);
     const videoRef = useRef(null);
@@ -40,7 +39,7 @@ export const Home = () => {
 
                 {/* ... Inicio sección Marketplace ... */}
                 <div className="title-cards-servicios">
-                    <h2>Categorias del Marketplace</h2>
+                    <h2>Nuestros Servicios e Iniciativas</h2>
                 </div>
                 <div className="row container-card">
                     <div className="card col">
@@ -69,47 +68,22 @@ export const Home = () => {
                             </button>
                         </div>
                         <div className="contenido-card">
-                            <h3>Intercambia lo que más te guste</h3>
-                            <p>Encuentra una gran variedad de libros de diferentes autores y categorias, ofrecidos por nuestros usuarios</p>
+                            <h3>Intercambia lo que más te GUSTE!</h3>
+                            <p>Si ya leiste tu libro favorito y quieres leer uno nuevo, ¿por qué no compartirlo con otra persona que ofrezca tu nuevo libro favorito? En nuestra plataforma te ayudamos a conectar con usuarios para que puedas intercambiar libros. </p>
                             <Link to="/marketplace">
-                                <button type="button" className="btn btn-warning">Intercambio</button>
+                                <button type="button" className="btn btn-warning">Intercambia Ya!</button>
                             </Link>
                         </div>
                     </div>
-
-                    <div className="card col">
-                        <div id="carouselCategoria2" className="carousel slide" data-ride="carousel">
-                            <div className="carousel-inner">
-                                <div className="carousel-item active">
-                                    <img src="https://wmagazin.com/wp-content/uploads/2022/12/Portada-Caperucitaroja-WMagazin-e1672189455210.jpg" className="d-block w-100" alt="Categoría 1" />
-                                </div>
-                                <div className="carousel-item">
-                                    <img src="https://wmagazin.com/wp-content/uploads/2022/12/Portada-Lashorashanperdidosureloj-WMagazin-e1672189589284.jpg" className="d-block w-100" alt="Categoría 2" />
-                                </div>
-                                <div className="carousel-item">
-                                    <img src="https://wmagazin.com/wp-content/uploads/2022/12/Portada-Laleydelmashombre-WMagazin-e1672189675551.jpg" className="d-block w-100" alt="Categoría 3" />
-                                </div>
-                                <div className="carousel-item">
-                                    <img src="https://wmagazin.com/wp-content/uploads/2022/12/Portada-Elsol-WMagazin-scaled-e1672190074681.jpg" className="d-block w-100" alt="Categoría 4" />
-                                </div>
-                            </div>
-                            <button className="carousel-control-prev" type="button" data-bs-target="#carouselCategoria2" data-bs-slide="prev">
-                                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span className="visually-hidden">Previous</span>
-                            </button>
-                            <button className="carousel-control-next" type="button" data-bs-target="#carouselCategoria2" data-bs-slide="next">
-                                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span className="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                        <div className="contenido-card">
-                            <h3>Intercambia libros!!!</h3>
-                            <p>En Bacan Market puedes intercambiar los libros que ya terminaste de leer por otro que no lo leiste. ¿Quieres ver cuales estan disponibles? Ingresa ya!!!</p>
-                            <button type="button" className="btn btn-warning">Intercambia</button>
+                    <div className="card" style={{ width: "45%" }}>
+                        <img src="https://images.unsplash.com/photo-1583526241256-cb18e8635e5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" className="card-img-top" alt="Imagen Donación" />
+                        <div className="card-body">
+                            <h3 className="card-title">Ayudanos a compartir el CONOCIMIENTO!</h3>
+                            <p className="card-text">La misión de esta plataforma es poder conectar usuarios para que puedan compartir conocimiento y generar una comunidad de amantes de la lectura. Si quieres apoyar este iniciativa no lucrativa tu donación nos ayudara a mantener esta página.</p>
+                            <a href="#" className="btn btn-warning">Dona Ya!</a>
                         </div>
                     </div>
                 </div>
-
                 {/* ... Fin sección Marketplace ... */}
 
                 <div className="benefits-container">
@@ -153,4 +127,3 @@ export const Home = () => {
         </>
     );
 };
-
