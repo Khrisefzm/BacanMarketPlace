@@ -10,8 +10,6 @@ class User(db.Model):
     country = db.Column(db.String(120), unique=False, nullable=False)
     city = db.Column(db.String(120), unique=False, nullable=False)
     password = db.Column(db.String(300), unique=False, nullable=False)
-    # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
-    # seller_product = db.relationship("SellerProduct", backref = "user", lazy = True)
     product = db.relationship("Product", backref = "user", lazy = True)
 
     def __repr__(self):
@@ -31,13 +29,10 @@ class User(db.Model):
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
-    #product_type = db.Column(db.String(120))
     category = db.Column(db.String(50), unique=False, nullable=False)
     author = db.Column(db.String(120), unique=False, nullable=False)
     description = db.Column(db.String(255), unique=False, nullable=False)
     image= db.Column(db.String(500), unique=False, nullable=False)
-    #seller_product = db.relationship("SellerProduct", backref = "product", lazy = True)
-    #exchange_product = db.relationship("ExchangeProduct", backref = "product", lazy = True)
     interested_product_one = db.Column(db.String(120), nullable=False)
     interested_product_two = db.Column(db.String(120), nullable=True)
     interested_product_three = db.Column(db.String(120), nullable=True)
@@ -51,7 +46,6 @@ class Product(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            #"product_type" : self.product_type,
             "category" : self.category,
             "author" : self.author,
             "description" : self.description,
@@ -63,20 +57,3 @@ class Product(db.Model):
         }
     
     
-class ExchangeProduct(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    interested_product_one = db.Column(db.String(120), nullable=False)
-    interested_product_two = db.Column(db.String(120), nullable=True)
-    interested_product_three = db.Column(db.String(120), nullable=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey("product.id"), nullable=False)
-
-    def __repr__(self):
-        return f'<ExchangeProduct {self.product_id}>'
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "user_id": self.user_id,
-            "product_id" : self.product_id,
-        }
