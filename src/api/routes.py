@@ -2,6 +2,10 @@ from flask import Flask, request, jsonify, Blueprint
 from api.models import db, User, Product
 from flask_bcrypt import Bcrypt
 from flask_cors import cross_origin
+# JWT extended
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
