@@ -28,7 +28,7 @@ export const Registro = () => {
         e.preventDefault();
         console.log(formInfo)
         if (comfirmPassword === formInfo.password) {
-            fetch(process.env.BACKEND_URL + "/api/singup", {
+            fetch(process.env.BACKEND_URL + "/api/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
