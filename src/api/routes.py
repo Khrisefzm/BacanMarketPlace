@@ -6,6 +6,10 @@ from flask_cors import cross_origin
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -28,13 +32,36 @@ def create_user():
     db.session.commit()
     return jsonify(user.serialize()), 200
 
+@api.route('/login', methods = ['POST'])
+@cross_origin()
+def token():
+    user = request.json.get("user_name", None)
+    password = request.json.get("password", None)
+
+    user_from_db = User.query.filter_by(user_name=user).one_or_none()
+    if not user_from_db :
+        return jsonify("El usuario no existe"), 401
+    else :  
+        password_from_db = user_from_db.password
+        print(password_from_db)
+        if not bcrypt.check_password_hash(password_from_db, password):
+            return jsonify("La contraseña no es correcta"), 401
+    access_token = create_access_token(identity=user)
+    return jsonify(access_token=access_token)
+
+@app.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
+
 @api.route('/products', methods=['POST', 'GET'])
 @cross_origin()
 def post_get_product():
     if request.method == 'POST':
         data = request.json
         new_product = Product(
-            
             category=data.get("category"),
             name=data.get("name"),
             author=data.get("author"),
