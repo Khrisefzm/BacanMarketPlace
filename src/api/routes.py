@@ -28,7 +28,7 @@ def create_user():
     db.session.commit()
     return jsonify(user.serialize()), 200
 
-@api.route('/token', methods = ['POST'])
+@api.route('/login', methods = ['POST'])
 @cross_origin()
 def token():
     user = request.json.get("user_name", None)
