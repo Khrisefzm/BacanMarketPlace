@@ -1,5 +1,5 @@
 import click
-from api.models import db, User, Product, ExchangeProduct
+from api.models import db, User, Product
 
 def setup_commands(app):
     
