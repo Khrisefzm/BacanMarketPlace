@@ -15,12 +15,12 @@ export const Navbar = () => {
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
                             <Link to="/registro" className="nav-link">
-                                <button className="btn btn-warning">Sign In</button>
+                                <button className="btn btn-warning">Registrarse</button>
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/login" className="nav-link">
-                                <button className="btn btn-outline-warning">Login</button>
+                                <button className="btn btn-outline-warning">Iniciar Sesión</button>
                             </Link>
                         </li>
                     </ul>

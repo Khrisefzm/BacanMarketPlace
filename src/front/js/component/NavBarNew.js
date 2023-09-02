@@ -5,7 +5,7 @@ export const NavBarNew = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-white">
             <div className="container">
-                <Link to="/" className="navbar-brand">
+                <Link to="/marketplace" className="navbar-brand">
                     <img src="https://i.imgur.com/SnqqdyB.png" alt="Logo" width="150" height="90" />
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +19,7 @@ export const NavBarNew = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/demo" className="nav-link">
+                            <Link to="/add-product" className="nav-link">
                                 <button className="btn btn-outline-warning">Intercambiar</button>
                             </Link>
                         </li>
