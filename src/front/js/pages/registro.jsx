@@ -47,7 +47,7 @@ export const Registro = () => {
 
                     return response.json();
                 })
-                .then(data => { console.log(data) })
+                .then(data => { return data })
                 .catch(error => console.log(error));
         } else {
             console.log("las contraseñas no coinciden")
