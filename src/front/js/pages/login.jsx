@@ -13,7 +13,6 @@ export const Login = () => {
     const changeInput = e => {
         setFormInfo({ ...formInfo, [e.target.name]: e.target.value });
     }
-    console.log(formInfo);
 
     const sentForm = e => {
         e.preventDefault();

@@ -2,10 +2,16 @@ from flask import Flask, request, jsonify, Blueprint
 from api.models import db, User, Product
 from flask_bcrypt import Bcrypt
 from flask_cors import cross_origin
+# JWT extended
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
+
+import base64
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -58,8 +64,9 @@ def post_get_product():
     if request.method == 'POST':
         data = request.json
         new_product = Product(
-            category=data.get("category"),
             name=data.get("name"),
+            product_state=data.get("product_state"),
+            category=data.get("category"),
             author=data.get("author"),
             description=data.get("description"),
             image=data.get("image"),
@@ -87,6 +94,7 @@ def single_product(id):
     else:
         data = request.json
         product.name = data.get("name", product.name)
+        product.product_state = data.get("product_state", product.product_state)
         product.category = data.get("category", product.category)
         product.author = data.get("author", product.author)
         product.description = data.get("description", product.description)
