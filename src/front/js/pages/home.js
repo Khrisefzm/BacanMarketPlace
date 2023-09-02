@@ -70,7 +70,7 @@ export const Home = () => {
                         <div className="contenido-card">
                             <h3>Intercambia lo que más te GUSTE!</h3>
                             <p>Si ya leiste tu libro favorito y quieres leer uno nuevo, ¿por qué no compartirlo con otra persona que ofrezca tu nuevo libro favorito? En nuestra plataforma te ayudamos a conectar con usuarios para que puedas intercambiar libros. </p>
-                            <Link to="/marketplace">
+                            <Link to="/login">
                                 <button type="button" className="btn btn-warning">Intercambia Ya!</button>
                             </Link>
                         </div>
