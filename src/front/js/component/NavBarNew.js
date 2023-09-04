@@ -1,7 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const NavBarNew = () => {
+    const { actions } = useContext(Context);
+    const navigate = useNavigate();
+
+    const logout = () =>{
+        actions.logout();
+        navigate("/");
+    };
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-white">
             <div className="container">
@@ -27,12 +36,12 @@ export const NavBarNew = () => {
                     <div className="d-flex">
                         <div className="dropdown me-1">
                             <button type="button" className="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">
-                                Menu
+                                {`Hola! usuario`}
                             </button>
                             <ul className="dropdown-menu">
                                 <li><button className="dropdown-item" type="button">Perfil</button></li>
                                 <li><button className="dropdown-item" type="button">Historial</button></li>
-                                <li><button className="dropdown-item" type="button">Cerrar Sesión</button></li>
+                                <li><button className="dropdown-item" type="button" onClick={()=>logout()}>Cerrar Sesión</button></li>
                             </ul>
                         </div>
                     </div>

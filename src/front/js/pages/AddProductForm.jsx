@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { NavBarNew } from "../component/NavBarNew";
 
 export const AddProductForm = () => {
 
@@ -39,7 +38,6 @@ export const AddProductForm = () => {
 
     return (
         <>
-            <NavBarNew />
             <div className="container">
                 <h1 className="text-center">Añadir producto</h1>
                 <form>
