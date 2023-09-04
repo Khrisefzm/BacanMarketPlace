@@ -10,7 +10,7 @@ import { Registro } from "./pages/registro.jsx"
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
-import { Navbar } from "./component/navbar.jsx";
+import { GeneralNavbar } from "./component/GeneralNavbar.jsx";
 import { Footer } from "./component/footer";
 import { ProductPage } from "./pages/productPage.js";
 import { CheckOut } from "./pages/CheckOut.jsx";
@@ -32,6 +32,7 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
+                    <GeneralNavbar/>
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Password />} path="/password" />
@@ -43,7 +44,7 @@ const Layout = () => {
                         <Route element={<ExchangeProductos />} path="/exchange" />
                         <Route element={<ComfirmExchange />} path="/comfirm-exchange" />
                         <Route element={<AddProductForm />} path="/add-product" />
-                        <Route element={<EcommerceMain/>} path="/marketplace" />
+                        <Route element={<EcommerceMain />} path="/marketplace" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

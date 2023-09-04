@@ -2,10 +2,9 @@ import React, { useContext, useRef } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
-import { Navbar } from "../component/navbar.jsx";
 
 export const Home = () => {
-    const { store, actions } = useContext(Context);
+    const { store } = useContext(Context);
     const videoRef = useRef(null);
 
     const playVideo = () => {
@@ -16,7 +15,6 @@ export const Home = () => {
 
     return (
         <>
-            <Navbar />
             <div className="home-container">
                 <div className="row">
                     <div className="video-container col" onClick={playVideo}>
@@ -70,7 +68,7 @@ export const Home = () => {
                         <div className="contenido-card">
                             <h3>Intercambia lo que más te GUSTE!</h3>
                             <p>Si ya leiste tu libro favorito y quieres leer uno nuevo, ¿por qué no compartirlo con otra persona que ofrezca tu nuevo libro favorito? En nuestra plataforma te ayudamos a conectar con usuarios para que puedas intercambiar libros. </p>
-                            <Link to="/login">
+                            <Link to={store.token && store.token !== "" && store.token !== undefined ? "/marketplace":"/login"}>
                                 <button type="button" className="btn btn-warning">Intercambia Ya!</button>
                             </Link>
                         </div>
@@ -80,7 +78,9 @@ export const Home = () => {
                         <div className="card-body">
                             <h3 className="card-title">Ayudanos a compartir el CONOCIMIENTO!</h3>
                             <p className="card-text">La misión de esta plataforma es poder conectar usuarios para que puedan compartir conocimiento y generar una comunidad de amantes de la lectura. Si quieres apoyar este iniciativa no lucrativa tu donación nos ayudara a mantener esta página.</p>
-                            <a href="#" className="btn btn-warning">Dona Ya!</a>
+                            <Link to={store.token && store.token !== "" && store.token !== undefined ? "/marketplace":"/login"}>
+                                <button type="button" className="btn btn-warning">Dona Ya!</button>
+                            </Link>
                         </div>
                     </div>
                 </div>

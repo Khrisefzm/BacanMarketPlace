@@ -42,7 +42,7 @@ def token():
 
     user_from_db = User.query.filter_by(user_name=user).one_or_none()
     if not user_from_db :
-        return jsonify("El usuario no existe"), 401
+        return jsonify("El usuario no existe"), 400
     else :  
         password_from_db = user_from_db.password
         print(password_from_db)

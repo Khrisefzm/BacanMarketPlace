@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
-import { NavBarNew } from "../component/NavBarNew.js";
 
 const EcommerceMain = () => {
     const [showDonationModal, setShowDonationModal] = useState(false);
@@ -175,7 +174,6 @@ const EcommerceMain = () => {
 
     return (
         <>
-            <NavBarNew />
             <div className="container mt-5">
                 <div className="row">
                     {products.map(product => (
