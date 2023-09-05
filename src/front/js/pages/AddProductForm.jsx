@@ -70,17 +70,17 @@ export const AddProductForm = () => {
                             <label className="form-label">Estado:</label>
                             <select className="form-select" aria-label="Default select example" name="product_state" onChange={handleInputChange}>
                                 <option defaultValue>Selecciona una opción</option>
-                                <option value="1">Usado</option>
-                                <option value="2">Nuevo</option>
+                                <option value="usado">Usado</option>
+                                <option value="nuevo">Nuevo</option>
                             </select>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-12 mb-3">
                             <label className="form-label">Categoría:</label>
                             <select className="form-select" aria-label="Default select example" name="category" onChange={handleInputChange}>
                                 <option defaultValue>Selecciona una opción</option>
-                                <option value="1">Categoría 1</option>
-                                <option value="2">Categoría 2</option>
-                                <option value="2">Categoría 3</option>
+                                <option value="autoayuda">Autoayuda</option>
+                                <option value="romance">Romance</option>
+                                <option value="ficción">Ficción</option>
                             </select>
                         </div>
                     </div>

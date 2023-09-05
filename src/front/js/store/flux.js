@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			users: [],
 			singleUser:{},
 			products: [],
+			singleProduct: {},
 			message: null,
 			demo: [
 				{
@@ -109,7 +110,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
-
+			singleProduct: async(id) => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/products/" + id);
+					const data = await response.json();
+					setStore({singleProduct: data});
+				} catch(error) {
+					console.log(error);
+				}
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
