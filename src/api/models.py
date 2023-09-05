@@ -6,6 +6,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     user_name = db.Column(db.String(120), unique=True, nullable=False)
+    name = db.Column(db.String(120), unique=False, nullable=False)
+    last_name = db.Column(db.String(120), unique=False, nullable=False)
     cellphone = db.Column(db.BigInteger, unique=True, nullable=False)
     country = db.Column(db.String(120), unique=False, nullable=False)
     city = db.Column(db.String(120), unique=False, nullable=False)
@@ -20,6 +22,8 @@ class User(db.Model):
             "id": self.id,
             "email": self.email,
             "user_name" : self.user_name,
+            "name" : self.name,
+            "last_name" : self.last_name,
             "cellphone" : self.cellphone,
             "country" : self.country,
             "city" : self.city,

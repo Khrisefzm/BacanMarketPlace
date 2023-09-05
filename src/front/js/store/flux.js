@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: null,
+			user:{},
 			message: null,
 			demo: [
 				{
@@ -17,7 +18,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
-
 			login: async (form) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/login", {
@@ -41,16 +41,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 					alert("Hubo un error, por favor trate de nuevo más tarde")
 				}
 			},
-
 			tokenFomLocalStorage: () => {
 				const token = localStorage.getItem("jwt-token");
 				if (token && token != "" && token != undefined) setStore({ token: token });;
 			},
-
 			logout: () => {
 				localStorage.removeItem("jwt-token");
 				setStore({ token: null });
 			},
+			seeUser: async() => {
+				const store = getStore();
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/user", {
+						method: "GET",
+						headers: {
+							Authorization: "Bearer " + store.token,
+						}
+					});
+					const data = await response.json();
+					setStore({user: data});
+				} catch(error) {
+					console.log(error);
+				}
+			},
+
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");

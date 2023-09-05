@@ -11,8 +11,6 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 
-import base64
-
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
@@ -25,6 +23,8 @@ def create_user():
     user = User(
         email=data.get("email"),
         user_name=data.get("user_name"),
+        name=data.get("name"),
+        last_name=data.get("last_name"),
         cellphone=data.get("cellphone"),
         country=data.get("country"),
         city=data.get("city"),
@@ -37,10 +37,10 @@ def create_user():
 @api.route('/login', methods = ['POST'])
 @cross_origin()
 def token():
-    user = request.json.get("user_name", None)
+    user_name = request.json.get("user_name", None)
     password = request.json.get("password", None)
 
-    user_from_db = User.query.filter_by(user_name=user).one_or_none()
+    user_from_db = User.query.filter_by(user_name=user_name).one_or_none()
     if not user_from_db :
         return jsonify("El usuario no existe"), 400
     else :  
@@ -48,15 +48,16 @@ def token():
         print(password_from_db)
         if not bcrypt.check_password_hash(password_from_db, password):
             return jsonify("La contraseña no es correcta"), 401
-    access_token = create_access_token(identity=user)
+    access_token = create_access_token(identity=user_from_db.id)
     return jsonify(access_token=access_token)
 
-@app.route("/protected", methods=["GET"])
+@api.route("/user", methods=['GET'])
 @jwt_required()
-def protected():
+def protected_single_user():
     # Access the identity of the current user with get_jwt_identity
-    current_user = get_jwt_identity()
-    return jsonify(logged_in_as=current_user), 200
+    current_user_id = get_jwt_identity()
+    data_user = User.query.filter_by(id=current_user_id).one_or_none()
+    return jsonify(data_user.serialize()), 200
 
 @api.route('/products', methods=['POST', 'GET'])
 @cross_origin()
