@@ -79,7 +79,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			singleUser: async(id) => {
 				try{
-					const response = await fetch(process.env.BACKEND_URL + "/user/" + id);
+					const response = await fetch(process.env.BACKEND_URL + "/api/user/" + id);
 					const data = await response.json();
 					setStore({singleUser: data});
 				} catch(error) {

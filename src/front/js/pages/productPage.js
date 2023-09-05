@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
+import  {SellerInformation}  from "../component/SellerInformation.jsx";
 
 export const ProductPage = () => {
 
@@ -9,18 +10,9 @@ export const ProductPage = () => {
 
     useEffect(() => {
         actions.singleProduct(params.theid);
-        actions.allUsers();
     }, [])
 
-    const filterUserById = (id) => {
-        const users = store.users;
-        const singleUser = users.filter(user => user.id == id)
-        return singleUser;
-    };
-
     const product = store.singleProduct;
-    const user = filterUserById(product.user_id);
-    console.log(user[0]);
 
     return (
         <div className="container">
@@ -59,7 +51,7 @@ export const ProductPage = () => {
                     <h2>Descripción</h2>
                     <p>{product.description}</p>
                     <div className="d-flex flex-row">
-                        <Link to="/exchange">
+                        <Link to={`/exchange/${product.id}`}>
                             <button type="button" className="btn btn-success">Ofrecer intercambio</button>
                         </Link>
                     </div>
@@ -67,20 +59,11 @@ export const ProductPage = () => {
             </div>
             <hr />
             <div className="row mt-4">
-                <div className="col-sm-2 col-md-2 col-lg-2">
-                    <img src="https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png" alt="foto de usuario" loading="lazy" />
-                </div>
                 {
-                    user && user != "" ?
-                        <div className="col-10">
-                            <h3>Usuario: {user[0].user_name} </h3>
-                            <h5>{user[0].name + " " + user[0].last_name}</h5>
-                            <h4>Lugar de entrega:</h4>
-                            <p>{user[0].city + ", " + user[0].country}</p>
-                        </div> :
+                    product.user_id && product.user_id != "" ?
+                        <SellerInformation id={product.user_id} /> :
                         <></>
                 }
-
             </div>
         </div>
     );
