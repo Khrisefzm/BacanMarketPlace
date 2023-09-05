@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 export const AddProductForm = () => {
+
+    const {store, actions} = useContext(Context);
 
     const [formInfo, setFormInfo] = useState({
         name: "",
@@ -12,35 +16,37 @@ export const AddProductForm = () => {
         interested_product_one: "",
         interested_product_two: "",
         interested_product_three: "",
+        user_id: store.user.id
     })
-
-    const [base64, setBase64] = useState("");
 
     const handleFileChange = e => {
         const selectedFile = e.target.files[0];
+        let base64 = "";
+        const name = e.target.name;
         if (selectedFile) {
             // Lee el archivo como un objeto Blob
             const reader = new FileReader();
-            reader.onloadend = () => {
-                // Convierte el archivo a base64
-                setBase64(reader.result);
-            };
             reader.readAsDataURL(selectedFile);
-        }
-        console.log(base64)
-        setFormInfo({...formInfo, [e.target.name]: base64})
+            reader.onload = () => {
+                // Convierte el archivo a base64
+                base64 = reader.result;
+                setFormInfo({...formInfo, [name]: base64})
+            };
+        }  
     };
-
     const handleInputChange = e => {
         setFormInfo({ ...formInfo, [e.target.name]: e.target.value });
     }
-    console.log(formInfo)
 
+    const sentForm = e => {
+        e.preventDefault();
+        actions.addProduct(formInfo);
+    }
     return (
         <>
             <div className="container">
                 <h1 className="text-center">Añadir producto</h1>
-                <form>
+                <form onSubmit={sentForm}>
                     {/* primera Fila */}
                     <div className="row">
                         <div className="col-lg-6 col-sm-12 mb-3">
@@ -104,6 +110,9 @@ export const AddProductForm = () => {
                         <textarea className="form-control" rows="3" name="description" onChange={handleInputChange} ></textarea>
                     </div>
                     <button type="submit" className="btn btn-primary">Añadir producto</button>
+                    <Link to="/marketplace">
+                        <button type="button" className="btn btn-danger">Cancelar</button>
+                    </Link>
                 </form>
             </div>
         </>

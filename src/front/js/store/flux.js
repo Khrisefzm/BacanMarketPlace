@@ -64,6 +64,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			addProduct: async(form) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "/api/products", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(form)
+					})
+					const data = await response.json();
+					return data;
+				}
+				catch (error) {
+					alert("Hubo un error, por favor trate de nuevo más tarde")
+				}
+			},
 
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
