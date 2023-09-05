@@ -3,6 +3,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			token: null,
 			user:{},
+			users: [],
+			singleUser:{},
+			products: [],
 			message: null,
 			demo: [
 				{
@@ -64,6 +67,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			allUsers: async() => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/users");
+					const data = await response.json();
+					setStore({users: data});
+				} catch(error) {
+					console.log(error);
+				}
+			},
+			singleUser: async(id) => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/user/" + id);
+					const data = await response.json();
+					setStore({singleUser: data});
+				} catch(error) {
+					console.log(error);
+				}
+			},
 			addProduct: async(form) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/products", {
@@ -77,6 +98,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				catch (error) {
 					alert("Hubo un error, por favor trate de nuevo más tarde")
+				}
+			},
+			seeProducts: async() => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/products");
+					const data = await response.json();
+					setStore({products: data});
+				} catch(error) {
+					console.log(error);
 				}
 			},
 
