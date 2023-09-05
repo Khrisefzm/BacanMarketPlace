@@ -72,6 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(form)
 					})
 					const data = await response.json();
+					alert("Producto añadido")
 					return data;
 				}
 				catch (error) {

@@ -7,7 +7,6 @@ import { Home } from "./pages/home";
 import { Password } from "./pages/password.jsx"
 import { Login } from "./pages/login.jsx"
 import { Registro } from "./pages/registro.jsx"
-import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
 import { GeneralNavbar } from "./component/GeneralNavbar.jsx";

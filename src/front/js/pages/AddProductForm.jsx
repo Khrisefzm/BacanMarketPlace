@@ -41,6 +41,19 @@ export const AddProductForm = () => {
     const sentForm = e => {
         e.preventDefault();
         actions.addProduct(formInfo);
+        setFormInfo({
+            name: "",
+            product_state: "",
+            category: "",
+            author: "",
+            description: "",
+            image: "",
+            interested_product_one: "",
+            interested_product_two: "",
+            interested_product_three: "",
+            user_id: store.user.id
+        });
+        e.target.reset();
     }
     return (
         <>
@@ -109,7 +122,7 @@ export const AddProductForm = () => {
                         <label className="form-label">Description: </label>
                         <textarea className="form-control" rows="3" name="description" onChange={handleInputChange} ></textarea>
                     </div>
-                    <button type="submit" className="btn btn-primary">Añadir producto</button>
+                    <button type="submit" className="btn btn-success me-3">Añadir producto</button>
                     <Link to="/marketplace">
                         <button type="button" className="btn btn-danger">Cancelar</button>
                     </Link>
