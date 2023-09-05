@@ -40,11 +40,11 @@ const Layout = () => {
                         <Route element={<Registro />} path="/registro" />
                         <Route element={<ProductPage />} path="/product/:theid" />
                         <Route element={<CheckOut />} path="/checkout" />
-                        <Route element={<ExchangeProductos />} path="/exchange" />
+                        <Route element={<ExchangeProductos />} path="/exchange/:theid" />
                         <Route element={<ComfirmExchange />} path="/comfirm-exchange" />
                         <Route element={<AddProductForm />} path="/add-product" />
                         <Route element={<EcommerceMain />} path="/marketplace" />
-                        <Route element={<ContactPage />} path="/contactpage" />
+                        <Route element={<ContactPage />} path="/contactpage/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
