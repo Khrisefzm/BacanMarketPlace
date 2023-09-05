@@ -41,6 +41,19 @@ export const AddProductForm = () => {
     const sentForm = e => {
         e.preventDefault();
         actions.addProduct(formInfo);
+        setFormInfo({
+            name: "",
+            product_state: "",
+            category: "",
+            author: "",
+            description: "",
+            image: "",
+            interested_product_one: "",
+            interested_product_two: "",
+            interested_product_three: "",
+            user_id: store.user.id
+        });
+        e.target.reset();
     }
     return (
         <>
@@ -57,17 +70,17 @@ export const AddProductForm = () => {
                             <label className="form-label">Estado:</label>
                             <select className="form-select" aria-label="Default select example" name="product_state" onChange={handleInputChange}>
                                 <option defaultValue>Selecciona una opción</option>
-                                <option value="1">Usado</option>
-                                <option value="2">Nuevo</option>
+                                <option value="usado">Usado</option>
+                                <option value="nuevo">Nuevo</option>
                             </select>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-12 mb-3">
                             <label className="form-label">Categoría:</label>
                             <select className="form-select" aria-label="Default select example" name="category" onChange={handleInputChange}>
                                 <option defaultValue>Selecciona una opción</option>
-                                <option value="1">Categoría 1</option>
-                                <option value="2">Categoría 2</option>
-                                <option value="2">Categoría 3</option>
+                                <option value="autoayuda">Autoayuda</option>
+                                <option value="romance">Romance</option>
+                                <option value="ficción">Ficción</option>
                             </select>
                         </div>
                     </div>
@@ -109,7 +122,7 @@ export const AddProductForm = () => {
                         <label className="form-label">Description: </label>
                         <textarea className="form-control" rows="3" name="description" onChange={handleInputChange} ></textarea>
                     </div>
-                    <button type="submit" className="btn btn-primary">Añadir producto</button>
+                    <button type="submit" className="btn btn-success me-3">Añadir producto</button>
                     <Link to="/marketplace">
                         <button type="button" className="btn btn-danger">Cancelar</button>
                     </Link>

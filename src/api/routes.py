@@ -51,13 +51,38 @@ def token():
     access_token = create_access_token(identity=user_from_db.id)
     return jsonify(access_token=access_token)
 
-@api.route("/user", methods=['GET'])
+@api.route('/user', methods=['GET'])
 @jwt_required()
 def protected_single_user():
     # Access the identity of the current user with get_jwt_identity
     current_user_id = get_jwt_identity()
     data_user = User.query.filter_by(id=current_user_id).one_or_none()
     return jsonify(data_user.serialize()), 200
+
+@api.route('/users', methods=['GET'])
+@cross_origin()
+def all_users():
+    users = User.query.all()
+    return jsonify([user.serialize() for user in users]), 200
+
+@api.route('/user/<int:id>', methods=['GET', 'PUT'])
+@cross_origin()
+def single_user(id):
+    user = User.query.get(id)
+    if not user:
+        return jsonify({"message": "Usuario no válido"}), 404
+
+    if request.method == 'GET':
+        return jsonify(user.serialize()), 200
+    
+    else:
+        data = request.json
+        user.cellphone = data.get("name", user.cellphone)
+        user.country = data.get("product_state", user.country)
+        user.city = data.get("product_state", user.city)
+
+        db.session.commit()
+        return jsonify(user.serialize()), 200
 
 @api.route('/products', methods=['POST', 'GET'])
 @cross_origin()
@@ -103,7 +128,6 @@ def single_product(id):
         product.interested_product_one=data.get("interested_product_one", product.interested_product_one)
         product.interested_product_two=data.get("interested_product_two", product.interested_product_two)
         product.interested_product_three=data.get("interested_product_three", product.interested_product_three)
-        product.user_id=data.get("user_id", product.user_id)
 
         db.session.commit()
         return jsonify(product.serialize()), 200

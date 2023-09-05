@@ -3,6 +3,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			token: null,
 			user:{},
+			users: [],
+			singleUser:{},
+			products: [],
+			singleProduct: {},
 			message: null,
 			demo: [
 				{
@@ -64,6 +68,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			allUsers: async() => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/users");
+					const data = await response.json();
+					setStore({users: data});
+				} catch(error) {
+					console.log(error);
+				}
+			},
+			singleUser: async(id) => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/user/" + id);
+					const data = await response.json();
+					setStore({singleUser: data});
+				} catch(error) {
+					console.log(error);
+				}
+			},
 			addProduct: async(form) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/products", {
@@ -72,13 +94,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(form)
 					})
 					const data = await response.json();
+					alert("Producto añadido")
 					return data;
 				}
 				catch (error) {
 					alert("Hubo un error, por favor trate de nuevo más tarde")
 				}
 			},
-
+			seeProducts: async() => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/products");
+					const data = await response.json();
+					setStore({products: data});
+				} catch(error) {
+					console.log(error);
+				}
+			},
+			singleProduct: async(id) => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/products/" + id);
+					const data = await response.json();
+					setStore({singleProduct: data});
+				} catch(error) {
+					console.log(error);
+				}
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
