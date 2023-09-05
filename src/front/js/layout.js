@@ -18,6 +18,7 @@ import { AddProductForm } from "./pages/AddProductForm.jsx";
 import { ExchangeProductos } from "./pages/ExchangeProducts.jsx";
 import { ComfirmExchange } from "./pages/ComfirmExchange.jsx";
 import EcommerceMain from "./pages/EcommerceMain";
+import ContactPage from "./pages/ContactPage";
 
 
 //create your first component
@@ -45,6 +46,7 @@ const Layout = () => {
                         <Route element={<ComfirmExchange />} path="/comfirm-exchange" />
                         <Route element={<AddProductForm />} path="/add-product" />
                         <Route element={<EcommerceMain />} path="/marketplace" />
+                        <Route element={<ContactPage />} path="/contactpage" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
