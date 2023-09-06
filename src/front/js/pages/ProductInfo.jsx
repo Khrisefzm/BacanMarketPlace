@@ -53,6 +53,9 @@ export const ProductInfo = () => {
                         <Link to="/history">
                             <button type="button" className="btn btn-success">Atrás</button>
                         </Link>
+                        <Link to={"/edit-product/"+product.id} className="ms-3">
+                            <button type="button" className="btn btn-success">Editar</button>
+                        </Link>
                     </div>
                 </div>
             </div>
