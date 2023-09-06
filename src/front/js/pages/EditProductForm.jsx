@@ -1,11 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-export const AddProductForm = () => {
+export const EditProductForm =() =>{
 
     const {store, actions} = useContext(Context);
+    const params = useParams();
+    const navigate = useNavigate();
 
+    useEffect(()=>{
+        
+    },[]);
     const [formInfo, setFormInfo] = useState({
         name: "",
         product_state: "",
@@ -42,20 +47,6 @@ export const AddProductForm = () => {
     const sentForm = e => {
         e.preventDefault();
         actions.addProduct(formInfo);
-        setFormInfo({
-            name: "",
-            product_state: "",
-            category: "",
-            author: "",
-            description: "",
-            image: "",
-            interested_product_one: "",
-            interested_product_two: "",
-            interested_product_three: "",
-            exchange_state: "pending",
-            user_id: store.user.id
-        });
-        e.target.reset();
     }
     return (
         <>
