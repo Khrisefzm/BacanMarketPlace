@@ -27,8 +27,6 @@ export const EditProductForm = () => {
     }, []);
 
     const product = store.singleProduct;
-
-    console.log(formInfo)
     const handleFileChange = e => {
         const selectedFile = e.target.files[0];
         const name = e.target.name;

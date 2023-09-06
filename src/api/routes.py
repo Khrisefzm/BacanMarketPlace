@@ -109,7 +109,7 @@ def post_get_product():
         products = Product.query.all()
         return jsonify([product.serialize() for product in products]), 200
 
-@api.route('/products/<int:id>', methods=['GET', 'PUT'])
+@api.route('/products/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 @cross_origin()
 def single_product(id):
     product = Product.query.get(id)
@@ -118,6 +118,12 @@ def single_product(id):
 
     if request.method == 'GET':
         return jsonify(product.serialize()), 200
+    
+    elif request.method == 'DELETE':
+        db.session.delete(product)
+        db.session.commit()
+        return jsonify(product.serialize()), 200
+
     else:
         data = request.json
         product.name = data.get("name", product.name)

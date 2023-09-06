@@ -132,6 +132,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			deleteProduct: async(id) => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/products/" + id, {
+						method: "DELETE",
+					});
+					const data = await response.json();
+				} catch(error) {
+					console.log(error);
+				}
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
