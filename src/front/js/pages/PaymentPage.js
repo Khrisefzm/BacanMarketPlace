@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const PaymentPage = () => {
-  const navigate = useNavigate(); // Importante para la redirección
+  const navigate = useNavigate(); 
   const [formData, setFormData] = useState({
     name: '',
     cardNumber: '',
     expiration: '',
     cvv: '',
-    amount: '', // Campo para ingresar el monto de la donación
+    amount: '', 
   });
 
   const handleInputChange = (e) => {
@@ -112,7 +112,7 @@ const PaymentPage = () => {
           {/* Resumen del Pago */}
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">Resumen del Pago</h5>
+              <h5 className="card-title">Resumen de la Doación</h5>
               <p className="card-text">
                 <strong>Nombre en la Tarjeta:</strong> {formData.name}
               </p>
@@ -125,7 +125,7 @@ const PaymentPage = () => {
               <p className="card-text">
                 <strong>Monto de Donación:</strong> ${formData.amount}
               </p>
-              {/* Puedes agregar más detalles del resumen de pago aquí */}
+              
             </div>
           </div>
         </div>
