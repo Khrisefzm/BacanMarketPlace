@@ -16,6 +16,7 @@ export const AddProductForm = () => {
         interested_product_one: "",
         interested_product_two: "",
         interested_product_three: "",
+        exchange_state: "pending",
         user_id: store.user.id
     })
 
@@ -51,6 +52,7 @@ export const AddProductForm = () => {
             interested_product_one: "",
             interested_product_two: "",
             interested_product_three: "",
+            exchange_state: "pending",
             user_id: store.user.id
         });
         e.target.reset();

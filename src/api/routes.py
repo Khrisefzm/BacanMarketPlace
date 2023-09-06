@@ -99,6 +99,7 @@ def post_get_product():
             interested_product_one=data.get("interested_product_one"),
             interested_product_two=data.get("interested_product_two"),
             interested_product_three=data.get("interested_product_three"),
+            exchange_state=data.get("exchange_state"),
             user_id=data.get("user_id"),
         )
         db.session.add(new_product)
@@ -128,6 +129,7 @@ def single_product(id):
         product.interested_product_one=data.get("interested_product_one", product.interested_product_one)
         product.interested_product_two=data.get("interested_product_two", product.interested_product_two)
         product.interested_product_three=data.get("interested_product_three", product.interested_product_three)
+        product.exchange_state=data.get("exchange_state", product.exchange_state)
 
         db.session.commit()
         return jsonify(product.serialize()), 200
