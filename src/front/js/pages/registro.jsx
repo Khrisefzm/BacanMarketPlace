@@ -6,6 +6,8 @@ export const Registro = () => {
     const [formInfo, setFormInfo] = useState({
         email: "",
         user_name: "",
+        name: "",
+        last_name: "",
         cellphone: 0,
         country: "",
         city: "",
@@ -67,6 +69,14 @@ export const Registro = () => {
                     <div className="mb-3">
                         <label className="form-label">Nombre de usuario: </label>
                         <input type="text" className="form-control" required name="user_name" onChange={changeInput} />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Nombre: </label>
+                        <input type="text" className="form-control" required name="name" onChange={changeInput} />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Apellido: </label>
+                        <input type="text" className="form-control" required name="last_name" onChange={changeInput} />
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Número de teléfono: </label>

@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 export const AddProductForm = () => {
+
+    const {store, actions} = useContext(Context);
 
     const [formInfo, setFormInfo] = useState({
         name: "",
@@ -12,35 +16,50 @@ export const AddProductForm = () => {
         interested_product_one: "",
         interested_product_two: "",
         interested_product_three: "",
+        user_id: store.user.id
     })
-
-    const [base64, setBase64] = useState("");
 
     const handleFileChange = e => {
         const selectedFile = e.target.files[0];
+        let base64 = "";
+        const name = e.target.name;
         if (selectedFile) {
             // Lee el archivo como un objeto Blob
             const reader = new FileReader();
-            reader.onloadend = () => {
-                // Convierte el archivo a base64
-                setBase64(reader.result);
-            };
             reader.readAsDataURL(selectedFile);
-        }
-        console.log(base64)
-        setFormInfo({...formInfo, [e.target.name]: base64})
+            reader.onload = () => {
+                // Convierte el archivo a base64
+                base64 = reader.result;
+                setFormInfo({...formInfo, [name]: base64})
+            };
+        }  
     };
-
     const handleInputChange = e => {
         setFormInfo({ ...formInfo, [e.target.name]: e.target.value });
     }
-    console.log(formInfo)
 
+    const sentForm = e => {
+        e.preventDefault();
+        actions.addProduct(formInfo);
+        setFormInfo({
+            name: "",
+            product_state: "",
+            category: "",
+            author: "",
+            description: "",
+            image: "",
+            interested_product_one: "",
+            interested_product_two: "",
+            interested_product_three: "",
+            user_id: store.user.id
+        });
+        e.target.reset();
+    }
     return (
         <>
             <div className="container">
                 <h1 className="text-center">Añadir producto</h1>
-                <form>
+                <form onSubmit={sentForm}>
                     {/* primera Fila */}
                     <div className="row">
                         <div className="col-lg-6 col-sm-12 mb-3">
@@ -51,17 +70,17 @@ export const AddProductForm = () => {
                             <label className="form-label">Estado:</label>
                             <select className="form-select" aria-label="Default select example" name="product_state" onChange={handleInputChange}>
                                 <option defaultValue>Selecciona una opción</option>
-                                <option value="1">Usado</option>
-                                <option value="2">Nuevo</option>
+                                <option value="usado">Usado</option>
+                                <option value="nuevo">Nuevo</option>
                             </select>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-12 mb-3">
                             <label className="form-label">Categoría:</label>
                             <select className="form-select" aria-label="Default select example" name="category" onChange={handleInputChange}>
                                 <option defaultValue>Selecciona una opción</option>
-                                <option value="1">Categoría 1</option>
-                                <option value="2">Categoría 2</option>
-                                <option value="2">Categoría 3</option>
+                                <option value="autoayuda">Autoayuda</option>
+                                <option value="romance">Romance</option>
+                                <option value="ficción">Ficción</option>
                             </select>
                         </div>
                     </div>
@@ -103,7 +122,10 @@ export const AddProductForm = () => {
                         <label className="form-label">Description: </label>
                         <textarea className="form-control" rows="3" name="description" onChange={handleInputChange} ></textarea>
                     </div>
-                    <button type="submit" className="btn btn-primary">Añadir producto</button>
+                    <button type="submit" className="btn btn-success me-3">Añadir producto</button>
+                    <Link to="/marketplace">
+                        <button type="button" className="btn btn-danger">Cancelar</button>
+                    </Link>
                 </form>
             </div>
         </>

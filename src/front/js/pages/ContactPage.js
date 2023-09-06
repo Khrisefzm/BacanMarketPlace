@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "/workspaces/BacanMarketPlace/src/front/styles/contactpage.css"
+import { useParams } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 
 const ContactPage = () => {
-    // Estos datos reemplazarlos para vincularlo con el Back!!!!
-    const contactInfo = {
-        username: "Usuario 1",
-        country: "Peru",
-        city: "Lima",
-        phone: "123456789",
-        email: "usuario1@gmail.com",
-    };
+    const params = useParams();
+    const { store, actions } = useContext(Context);
+
+    useEffect(() => {
+        actions.singleUser(params.theid);
+    }, [])
+
+    const user = store.singleUser;
 
     return (
         <Container className="contact-page mt-5">
@@ -19,27 +21,27 @@ const ContactPage = () => {
             <Row>
                 <Col md={6}>
                     <h4 className="contact-label">Nombre de Usuario:</h4>
-                    <p className="contact-info">{contactInfo.username}</p>
+                    <p className="contact-info">{user.name + " " + user.last_name}</p>
                 </Col>
                 <Col md={6}>
                     <h4 className="contact-label">País:</h4>
-                    <p className="contact-info">{contactInfo.country}</p>
+                    <p className="contact-info">{user.country}</p>
                 </Col>
             </Row>
             <Row>
                 <Col md={6}>
                     <h4 className="contact-label">Ciudad:</h4>
-                    <p className="contact-info">{contactInfo.city}</p>
+                    <p className="contact-info">{user.city}</p>
                 </Col>
                 <Col md={6}>
                     <h4 className="contact-label">Teléfono:</h4>
-                    <p className="contact-info">{contactInfo.phone}</p>
+                    <p className="contact-info">{user.cellphone}</p>
                 </Col>
             </Row>
             <Row>
                 <Col md={6}>
                     <h4 className="contact-label">Correo Electrónico:</h4>
-                    <p className="contact-info">{contactInfo.email}</p>
+                    <p className="contact-info">{user.email}</p>
                 </Col>
             </Row>
         </Container>

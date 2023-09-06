@@ -13,7 +13,6 @@
     width: 50%;
 }
 
-
 .text-container {
     width: 100%;
     padding: 60px;
@@ -175,17 +174,17 @@
 }
 
 /* Estilos para los botones */
-.btn {
+.btn-warning {
     background-color: #f59f00;
-    border: none;
+    /* border: none; */
     color: #fff;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
+    /* border-radius: 5px;
+    padding: 10px 20px; */
+    /* cursor: pointer; */
     transition: background-color 0.3s;
 }
 
-.btn:hover {
+.btn-warning:hover {
     background-color: #d18300;
 }
 

@@ -7,7 +7,6 @@ import { Home } from "./pages/home";
 import { Password } from "./pages/password.jsx"
 import { Login } from "./pages/login.jsx"
 import { Registro } from "./pages/registro.jsx"
-import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
 import { GeneralNavbar } from "./component/GeneralNavbar.jsx";
@@ -40,14 +39,13 @@ const Layout = () => {
                         <Route element={<Password />} path="/password" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Registro />} path="/registro" />
-                        {/* <Route element={<Single />} path="/single/:theid" /> */}
-                        <Route element={<ProductPage />} path="/product" />
+                        <Route element={<ProductPage />} path="/product/:theid" />
                         <Route element={<CheckOut />} path="/checkout" />
-                        <Route element={<ExchangeProductos />} path="/exchange" />
+                        <Route element={<ExchangeProductos />} path="/exchange/:theid" />
                         <Route element={<ComfirmExchange />} path="/comfirm-exchange" />
                         <Route element={<AddProductForm />} path="/add-product" />
                         <Route element={<EcommerceMain />} path="/marketplace" />
-                        <Route element={<ContactPage />} path="/contactpage" />
+                        <Route element={<ContactPage />} path="/contactpage/:theid" />
                         <Route element={<PaymentPage />} path="/paymentpage" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
