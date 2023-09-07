@@ -11,6 +11,7 @@ from api.models import db, User,Product,SellerProduct,ExchangeProduct
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+from flask_mail import Mail
 
 # Flask jwt
 from flask_jwt_extended import JWTManager
@@ -25,6 +26,14 @@ app.url_map.strict_slashes = False
 #Flask JWT
 app.config["JWT_SECRET_KEY"] = "4Geeks-key!"
 jwt = JWTManager(app)
+
+#Flask-email
+app.config["MAIL_SERVER"]= os.environ.get("MAIL_SERVER")
+app.config["MAIL_PORT"]= os.environ.get('MAIL_PORT')
+app.config["MAIL_USERNAME"]= os.environ.get('MAIL_USERNAME')
+app.config["MAIL_PASSWORD"]= os.environ.get('MAIL_PASSWORD')
+app.config["MAIL_USE_TLS"]= os.environ.get('MAIL_USE_TLS')
+app.config["MAIL_USE_SSL"]= os.environ.get('MAIL_USE_SSL')
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")

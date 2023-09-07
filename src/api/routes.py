@@ -7,9 +7,12 @@ from api.utils import generate_sitemap, APIException
 from flask_bcrypt import Bcrypt
 from flask_cors import cross_origin
 import json
+from flask_mail import Message, Mail
+
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
+mail = Mail(app)
 
 api = Blueprint('api', __name__)
 
@@ -34,9 +37,13 @@ def create_user():
 
 
 @api.route('/resendpass', methods=["POST"])
+@cross_origin()
 def resend_password():
     if request.method == 'POST':
         email = request.json
+        msg  = Message("Prueba 4geeks", sender="demo@demo.com", recipients=["danielnu04@hotmail.com"])
+        msg.body = "Mensaje de prueba"
+        mail.send(msg)
         print(email)
         return jsonify([]), 200
 
