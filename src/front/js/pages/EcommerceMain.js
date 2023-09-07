@@ -36,7 +36,7 @@ const EcommerceMain = () => {
         const singleUser = users.filter(user => user.id == id)
         return singleUser;
     };
-    const products = store.products.filter(product => product.user_id != store.user.id);
+    const products = store.products.filter(product => product.user_id != store.user.id && product.exchange_state === "pending");
 
     return (
         <>

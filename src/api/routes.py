@@ -99,6 +99,7 @@ def post_get_product():
             interested_product_one=data.get("interested_product_one"),
             interested_product_two=data.get("interested_product_two"),
             interested_product_three=data.get("interested_product_three"),
+            exchange_state=data.get("exchange_state"),
             user_id=data.get("user_id"),
         )
         db.session.add(new_product)
@@ -108,7 +109,7 @@ def post_get_product():
         products = Product.query.all()
         return jsonify([product.serialize() for product in products]), 200
 
-@api.route('/products/<int:id>', methods=['GET', 'PUT'])
+@api.route('/products/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 @cross_origin()
 def single_product(id):
     product = Product.query.get(id)
@@ -117,6 +118,12 @@ def single_product(id):
 
     if request.method == 'GET':
         return jsonify(product.serialize()), 200
+    
+    elif request.method == 'DELETE':
+        db.session.delete(product)
+        db.session.commit()
+        return jsonify(product.serialize()), 200
+
     else:
         data = request.json
         product.name = data.get("name", product.name)
@@ -128,6 +135,7 @@ def single_product(id):
         product.interested_product_one=data.get("interested_product_one", product.interested_product_one)
         product.interested_product_two=data.get("interested_product_two", product.interested_product_two)
         product.interested_product_three=data.get("interested_product_three", product.interested_product_three)
+        product.exchange_state=data.get("exchange_state", product.exchange_state)
 
         db.session.commit()
         return jsonify(product.serialize()), 200

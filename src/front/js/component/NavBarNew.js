@@ -27,7 +27,7 @@ export const NavBarNew = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <Link to="/registro" className="nav-link">
+                            <Link to="/paymentpage" className="nav-link">
                                 <button className="btn btn-warning">Donar</button>
                             </Link>
                         </li>
@@ -44,7 +44,7 @@ export const NavBarNew = () => {
                             </button>
                             <ul className="dropdown-menu">
                                 <li><button className="dropdown-item" type="button">Perfil</button></li>
-                                <li><button className="dropdown-item" type="button">Historial</button></li>
+                                <li><button className="dropdown-item" type="button" onClick={()=>navigate("/history")}>Historial</button></li>
                                 <li><button className="dropdown-item" type="button" onClick={()=>logout()}>Cerrar Sesión</button></li>
                             </ul>
                         </div>
