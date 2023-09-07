@@ -68,6 +68,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			editUser: async(form) => {
+				const store = getStore();
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/user", {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: "Bearer " + store.token,
+						},
+						body: JSON.stringify(form)
+					});
+					const data = await response.json();
+					setStore({user: data});
+					alert("Se realizaron los cambios")
+				} catch(error) {
+					alert("Hubo un error, por favor trate de nuevo más tarde");
+				}
+			},
 			allUsers: async() => {
 				try{
 					const response = await fetch(process.env.BACKEND_URL + "/api/users");

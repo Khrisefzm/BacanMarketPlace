@@ -43,7 +43,7 @@ export const NavBarNew = () => {
                                 {`Hola! ${store.user.name}`}
                             </button>
                             <ul className="dropdown-menu">
-                                <li><button className="dropdown-item" type="button">Perfil</button></li>
+                                <li><button className="dropdown-item" type="button" onClick={()=>navigate("/datosusuario")}>Perfil</button></li>
                                 <li><button className="dropdown-item" type="button" onClick={()=>navigate("/history")}>Historial</button></li>
                                 <li><button className="dropdown-item" type="button" onClick={()=>logout()}>Cerrar Sesión</button></li>
                             </ul>

@@ -61,13 +61,29 @@ def token():
     access_token = create_access_token(identity=user_from_db.id)
     return jsonify(access_token=access_token)
 
-@api.route('/user', methods=['GET'])
+@api.route('/user', methods=['GET', 'PUT'])
 @jwt_required()
 def protected_single_user():
-    # Access the identity of the current user with get_jwt_identity
-    current_user_id = get_jwt_identity()
-    data_user = User.query.filter_by(id=current_user_id).one_or_none()
-    return jsonify(data_user.serialize()), 200
+    if request.method == 'GET':
+        # Access the identity of the current user with get_jwt_identity
+        current_user_id = get_jwt_identity()
+        data_user = User.query.filter_by(id=current_user_id).one_or_none()
+        return jsonify(data_user.serialize()), 200
+    else :
+        current_user_id = get_jwt_identity()
+        data_user = User.query.filter_by(id=current_user_id).one_or_none()
+
+        data = request.json
+        data_user.name = data.get("name", data_user.name)
+        data_user.last_name = data.get("last_name", data_user.last_name)
+        data_user.cellphone = data.get("cellphone", data_user.cellphone)
+        data_user.city = data.get("city", data_user.city)
+        data_user.country = data.get("country", data_user.country)
+        data_user.email = data.get("email", data_user.email)
+
+        db.session.commit()
+        return jsonify(data_user.serialize()), 200
+
 
 @api.route('/users', methods=['GET'])
 @cross_origin()
