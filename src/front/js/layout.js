@@ -24,6 +24,7 @@ import DatosUsuario from "./pages/DatosUsuario";
 import { HistoryPage } from "./pages/HistoryPage.jsx";
 import { ProductInfo } from "./pages/ProductInfo.jsx";
 import { EditProductForm } from "./pages/EditProductForm.jsx";
+import { EditUser } from "./pages/EditUser.jsx";
 
 
 //create your first component
@@ -55,6 +56,7 @@ const Layout = () => {
                         <Route element={<ContactPage />} path="/contactpage/:theid" />
                         <Route element={<PaymentPage />} path="/paymentpage" />
                         <Route element={<DatosUsuario />} path="/datosusuario" />
+                        <Route element={<EditUser/>} path="/edit-user" />
                         <Route element={<HistoryPage />} path="/history" />
                         <Route element={<ProductInfo />} path="/product-info/:theid" />
                         <Route element={<EditProductForm />} path="/edit-product/:theid" />
