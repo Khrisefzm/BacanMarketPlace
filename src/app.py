@@ -11,6 +11,9 @@ from api.models import db, User,Product
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+from flask_mail import Mail, Message 
+
+# Flask jwt
 # Flask jwt extended
 from flask_jwt_extended import JWTManager
 
@@ -24,6 +27,15 @@ app.url_map.strict_slashes = False
 #Flask JWT
 app.config["JWT_SECRET_KEY"] = "4Geeks-key!"
 jwt = JWTManager(app)
+
+#Flask-email
+app.config["MAIL_SERVER"]= "smtp.gmail.com"
+app.config["MAIL_PORT"]= 465
+app.config["MAIL_USERNAME"]= "nicolasv0415@gmail.com"
+app.config["MAIL_PASSWORD"]= "fbqmakhunchvhvna"
+app.config["MAIL_USE_TLS"]= False
+app.config["MAIL_USE_SSL"]= True
+mail = Mail(app)
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
@@ -69,8 +81,18 @@ def serve_any_other_file(path):
     response.cache_control.max_age = 0 # avoid cache memory
     return response
 
+@app.route('/resendpass', methods=["GET"])
+def resend_password():
+    if request.method == 'GET':
+        # email = request.json
+        msg  = Message("Prueba 4geeks", sender="demo@demo.com", recipients=["danielnu04@hotmail.com"])
+        msg.body = "Mensaje de prueba"
+        mail.send(msg)
+        # print(email)
+        return jsonify([]), 200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3001))
     app.run(host='0.0.0.0', port=PORT, debug=True)
+

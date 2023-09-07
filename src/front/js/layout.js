@@ -5,6 +5,7 @@ import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
 import { Password } from "./pages/password.jsx"
+import { ResetPassword } from "./pages/resetPassword.jsx"
 import { Login } from "./pages/login.jsx"
 import { Registro } from "./pages/registro.jsx"
 import injectContext from "./store/appContext";
@@ -37,9 +38,11 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <GeneralNavbar/>
+                    <GeneralNavbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
+                        {/* <Route element={<Demo />} path="/demo" /> */}
+                        <Route element={<ResetPassword />} path="/ResetPassword" />
                         <Route element={<Password />} path="/password" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Registro />} path="/registro" />
@@ -53,8 +56,8 @@ const Layout = () => {
                         <Route element={<PaymentPage />} path="/paymentpage" />
                         <Route element={<DatosUsuario />} path="/datosusuario" />
                         <Route element={<HistoryPage />} path="/history" />
-                        <Route element={<ProductInfo/>} path="/product-info/:theid" />
-                        <Route element={<EditProductForm/>} path="/edit-product/:theid" />
+                        <Route element={<ProductInfo />} path="/product-info/:theid" />
+                        <Route element={<EditProductForm />} path="/edit-product/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify, Blueprint
 from api.models import db, User, Product
 from flask_bcrypt import Bcrypt
 from flask_cors import cross_origin
+import json
+from flask_mail import Message, Mail
+
 # JWT extended
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -13,6 +16,13 @@ from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
+app.config["MAIL_SERVER"]= "smtp.gmail.com"
+app.config["MAIL_PORT"]= 465
+app.config["MAIL_USERNAME"]= "nicolasv0415@gmail.com"
+app.config["MAIL_PASSWORD"]= "fbqmakhunchvhvna"
+app.config["MAIL_USE_TLS"]= False
+app.config["MAIL_USE_SSL"]= True
+mail = Mail(app)
 
 api = Blueprint('api', __name__)
 
@@ -83,6 +93,19 @@ def single_user(id):
 
         db.session.commit()
         return jsonify(user.serialize()), 200
+
+
+@api.route('/resendpass', methods=["POST"])
+@cross_origin()
+def resend_password():
+    if request.method == 'POST':
+        email = request.json
+        msg  = Message("Prueba 4geeks", sender="demo@demo.com", recipients=["danielnu04@hotmail.com"])
+        msg.body = "Mensaje de prueba"
+        mail.send(msg)
+        print(email)
+        return jsonify([]), 200
+
 
 @api.route('/products', methods=['POST', 'GET'])
 @cross_origin()

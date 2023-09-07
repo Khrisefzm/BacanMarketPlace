@@ -147,6 +147,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
+			sendRecoveryPass: async (email) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "/api/resendpass",{
+						method:'POST', 
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(email)
+					})
+					if (response.ok) {
+						return true;
+					} else {
+						return false;
+					}
+				
+					
+				} catch (error) {
+					
+				}
+
+			},
+
 			getMessage: async () => {
 				try {
 					// fetching data from the backend
