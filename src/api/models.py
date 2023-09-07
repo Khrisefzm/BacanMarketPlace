@@ -41,6 +41,7 @@ class Product(db.Model):
     interested_product_one = db.Column(db.String(120), nullable=False)
     interested_product_two = db.Column(db.String(120), nullable=True)
     interested_product_three = db.Column(db.String(120), nullable=True)
+    exchange_state = db.Column(db.String(120), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
     def __repr__(self):
@@ -58,6 +59,7 @@ class Product(db.Model):
             "interested_product_one" : self.interested_product_one,
             "interested_product_two" : self.interested_product_two,
             "interested_product_three" : self.interested_product_three,
+            "exchange_state" : self.exchange_state,
             "user_id" : self.user_id,
         }
     

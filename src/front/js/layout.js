@@ -20,6 +20,9 @@ import EcommerceMain from "./pages/EcommerceMain";
 import ContactPage from "./pages/ContactPage";
 import PaymentPage from "./pages/PaymentPage";
 import DatosUsuario from "./pages/DatosUsuario";
+import { HistoryPage } from "./pages/HistoryPage.jsx";
+import { ProductInfo } from "./pages/ProductInfo.jsx";
+import { EditProductForm } from "./pages/EditProductForm.jsx";
 
 
 //create your first component
@@ -49,6 +52,9 @@ const Layout = () => {
                         <Route element={<ContactPage />} path="/contactpage/:theid" />
                         <Route element={<PaymentPage />} path="/paymentpage" />
                         <Route element={<DatosUsuario />} path="/datosusuario" />
+                        <Route element={<HistoryPage />} path="/history" />
+                        <Route element={<ProductInfo/>} path="/product-info/:theid" />
+                        <Route element={<EditProductForm/>} path="/edit-product/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
