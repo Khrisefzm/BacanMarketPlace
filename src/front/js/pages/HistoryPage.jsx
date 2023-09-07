@@ -3,6 +3,8 @@ import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { BasicModal } from "../component/BasicModal.jsx";
+
 
 export const HistoryPage = () => {
 
@@ -36,15 +38,19 @@ export const HistoryPage = () => {
     const exchangeDone = (id) => {
         const obj = { exchange_state: "done" };
         actions.editProduct(id, obj);
-        let newFilterProducts = filterProducts.filter(product => product.id != id);
-        setFilterProducts(newFilterProducts);
+        if (id) {
+            let newFilterProducts = filterProducts.filter(product => product.id != id);
+            setFilterProducts(newFilterProducts); 
+        }
         handleClose();
     }
 
     const deleteProduct = (id) => {
         actions.deleteProduct(id);
-        let newFilterProducts = filterProducts.filter(product => product.id != id);
-        setFilterProducts(newFilterProducts);
+        if (id) {
+            let newFilterProducts = filterProducts.filter(product => product.id != id);
+            setFilterProducts(newFilterProducts); 
+        }
         handleClose();
     }
 
@@ -95,35 +101,21 @@ export const HistoryPage = () => {
                     </>
             }
             {/* Checkbutton modal */}
-            <Modal show={showModalOne} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Intercambio realizado</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>¿Realizaste correctamente el intercambio para este producto?</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Cancelar
-                    </Button>
-                    <Button variant="primary" onClick={() => { exchangeDone(selectProduct.id) }}>
-                        Sí
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <BasicModal 
+                title={"Intercambio realizado"} 
+                question={"¿Realizaste correctamente el intercambio para este producto?"} 
+                functionShow={showModalOne}
+                funtionClose={handleClose}
+                funtionOnClic={()=>{exchangeDone(selectProduct.id)}}
+            />
             {/* Deletebutton Modal */}
-            <Modal show={showModalTwo} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Eliminar producto</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>¿Está seguro que desea eliminar el producto?</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Cerrar
-                    </Button>
-                    <Button variant="primary" onClick={() => { deleteProduct(selectProduct.id) }}>
-                        Sí
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <BasicModal 
+                title={"Eliminar producto"} 
+                question={"¿Está seguro que desea eliminar el producto?"} 
+                functionShow={showModalTwo}
+                funtionClose={handleClose}
+                funtionOnClic={()=>{deleteProduct(selectProduct.id)}}
+            />
         </div>
     )
 };

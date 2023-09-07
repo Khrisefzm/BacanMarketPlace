@@ -2,18 +2,18 @@ import React from "react";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-export const BasicModal = () => {
+export const BasicModal = ({title, question, functionShow, funtionClose, funtionOnClic}) => {
     return(
-        <Modal show={showModalOne} onHide={handleClose}>
+        <Modal show={functionShow} onHide={funtionClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Intercambio realizado</Modal.Title>
+                    <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>¿Realizaste correctamente el intercambio para este producto?</Modal.Body>
+                <Modal.Body>{question}</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={funtionClose}>
                         Cancelar
                     </Button>
-                    <Button variant="primary" onClick={() => { exchangeDone(selectProduct.id) }}>
+                    <Button variant="primary" onClick={funtionOnClic}>
                         Sí
                     </Button>
                 </Modal.Footer>
