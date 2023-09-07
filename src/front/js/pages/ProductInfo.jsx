@@ -1,9 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import  {SellerInformation}  from "../component/SellerInformation.jsx";
 
-export const ProductPage = () => {
+export const ProductInfo = () => {
 
     const params = useParams();
     const { store, actions } = useContext(Context);
@@ -51,19 +50,14 @@ export const ProductPage = () => {
                     <h2>Descripción</h2>
                     <p>{product.description}</p>
                     <div className="d-flex flex-row">
-                        <Link to={`/exchange/${product.id}`}>
-                            <button type="button" className="btn btn-success">Ofrecer intercambio</button>
+                        <Link to="/history">
+                            <button type="button" className="btn btn-success">Atrás</button>
+                        </Link>
+                        <Link to={"/edit-product/"+product.id} className="ms-3">
+                            <button type="button" className="btn btn-success">Editar</button>
                         </Link>
                     </div>
                 </div>
-            </div>
-            <hr />
-            <div className="row mt-4">
-                {
-                    product.user_id && product.user_id != "" ?
-                        <SellerInformation id={product.user_id} /> :
-                        <></>
-                }
             </div>
         </div>
     );

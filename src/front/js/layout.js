@@ -4,21 +4,26 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
 import { Password } from "./pages/password.jsx"
 import { ResetPassword } from "./pages/resetPassword.jsx"
 import { Login } from "./pages/login.jsx"
 import { Registro } from "./pages/registro.jsx"
-import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
-import { Navbar } from "./component/navbar.jsx";
+import { GeneralNavbar } from "./component/GeneralNavbar.jsx";
 import { Footer } from "./component/footer";
 import { ProductPage } from "./pages/productPage.js";
 import { CheckOut } from "./pages/CheckOut.jsx";
 import { AddProductForm } from "./pages/AddProductForm.jsx";
 import { ExchangeProductos } from "./pages/ExchangeProducts.jsx";
 import { ComfirmExchange } from "./pages/ComfirmExchange.jsx";
+import EcommerceMain from "./pages/EcommerceMain";
+import ContactPage from "./pages/ContactPage";
+import PaymentPage from "./pages/PaymentPage";
+import { HistoryPage } from "./pages/HistoryPage.jsx";
+import { ProductInfo } from "./pages/ProductInfo.jsx";
+import { EditProductForm } from "./pages/EditProductForm.jsx";
+
 
 //create your first component
 const Layout = () => {
@@ -32,19 +37,25 @@ const Layout = () => {
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
-                    <Navbar />
+                    <GeneralNavbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<ResetPassword />} path="/ResetPassword" />
+                        <Route element={<Password />} path="/password" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Registro />} path="/registro" />
-                        <Route element={<Single />} path="/single/:theid" />
-                        <Route element={<ProductPage />} path="/product" />
+                        <Route element={<ProductPage />} path="/product/:theid" />
                         <Route element={<CheckOut />} path="/checkout" />
-                        <Route element={<ExchangeProductos />} path="/exchange" />
+                        <Route element={<ExchangeProductos />} path="/exchange/:theid" />
                         <Route element={<ComfirmExchange />} path="/comfirm-exchange" />
                         <Route element={<AddProductForm />} path="/add-product" />
+                        <Route element={<EcommerceMain />} path="/marketplace" />
+                        <Route element={<ContactPage />} path="/contactpage/:theid" />
+                        <Route element={<PaymentPage />} path="/paymentpage" />
+                        <Route element={<HistoryPage />} path="/history" />
+                        <Route element={<ProductInfo />} path="/product-info/:theid" />
+                        <Route element={<EditProductForm />} path="/edit-product/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

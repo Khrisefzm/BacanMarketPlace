@@ -6,6 +6,8 @@ export const Registro = () => {
     const [formInfo, setFormInfo] = useState({
         email: "",
         user_name: "",
+        name: "",
+        last_name: "",
         cellphone: 0,
         country: "",
         city: "",
@@ -26,9 +28,8 @@ export const Registro = () => {
 
     const sentForm = e => {
         e.preventDefault();
-        console.log(formInfo)
         if (comfirmPassword === formInfo.password) {
-            fetch(process.env.BACKEND_URL + "/api/singup", {
+            fetch(process.env.BACKEND_URL + "/api/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -36,18 +37,19 @@ export const Registro = () => {
                 body: JSON.stringify(formInfo)
             })
                 .then(response => {
-                    if (!response.ok) console.log("there was an error")
-                    else navigate("/login") //throw Error(response.statusText);
-
                     if (response.status === 401) {
                         console.log("Invalid credentials")
                     }
                     else if (response.status === 400) {
                         console.log("Invalid email or password format")
                     }
+
+                    if (!response.ok) console.log("there was an error")
+                    else navigate("/login") //throw Error(response.statusText);
+
                     return response.json();
                 })
-                .then(data => { console.log(data) })
+                .then(data => { return data })
                 .catch(error => console.log(error));
         } else {
             console.log("las contraseñas no coinciden")
@@ -67,6 +69,14 @@ export const Registro = () => {
                     <div className="mb-3">
                         <label className="form-label">Nombre de usuario: </label>
                         <input type="text" className="form-control" required name="user_name" onChange={changeInput} />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Nombre: </label>
+                        <input type="text" className="form-control" required name="name" onChange={changeInput} />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Apellido: </label>
+                        <input type="text" className="form-control" required name="last_name" onChange={changeInput} />
                     </div>
                     <div className="mb-3">
                         <label className="form-label">Número de teléfono: </label>

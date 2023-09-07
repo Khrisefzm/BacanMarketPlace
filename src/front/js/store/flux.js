@@ -1,6 +1,12 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			token: null,
+			user:{},
+			users: [],
+			singleUser:{},
+			products: [],
+			singleProduct: {},
 			message: null,
 			demo: [
 				{
@@ -16,6 +22,126 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
+			login: async (form) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "/api/login", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(form)
+					})
+					// if (!response.ok) throw("There was a problem in the login request")
+					if (response.status === 400) alert("Usuario no válido");
+					else if (response.status === 401) alert("Contraseña no válida");
+					else if (response.status !== 200) {
+						return false;
+					}
+					const data = await response.json();
+					console.log(data);
+					localStorage.setItem("jwt-token", data.access_token);
+					setStore({ token: data.access_token });
+					return true;
+				}
+				catch (error) {
+					alert("Hubo un error, por favor trate de nuevo más tarde")
+				}
+			},
+			tokenFomLocalStorage: () => {
+				const token = localStorage.getItem("jwt-token");
+				if (token && token != "" && token != undefined) setStore({ token: token });;
+			},
+			logout: () => {
+				localStorage.removeItem("jwt-token");
+				setStore({ token: null });
+			},
+			seeUser: async() => {
+				const store = getStore();
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/user", {
+						method: "GET",
+						headers: {
+							Authorization: "Bearer " + store.token,
+						}
+					});
+					const data = await response.json();
+					setStore({user: data});
+				} catch(error) {
+					console.log(error);
+				}
+			},
+			allUsers: async() => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/users");
+					const data = await response.json();
+					setStore({users: data});
+				} catch(error) {
+					console.log(error);
+				}
+			},
+			singleUser: async(id) => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/user/" + id);
+					const data = await response.json();
+					setStore({singleUser: data});
+				} catch(error) {
+					console.log(error);
+				}
+			},
+			addProduct: async(form) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "/api/products", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(form)
+					})
+					const data = await response.json();
+					alert("Producto añadido")
+					return data;
+				}
+				catch (error) {
+					alert("Hubo un error, por favor trate de nuevo más tarde")
+				}
+			},
+			seeProducts: async() => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/products");
+					const data = await response.json();
+					setStore({products: data});
+				} catch(error) {
+					console.log(error);
+				}
+			},
+			singleProduct: async(id) => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/products/" + id);
+					const data = await response.json();
+					setStore({singleProduct: data});
+				} catch(error) {
+					console.log(error);
+				}
+			},
+			editProduct: async(id, form) => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/products/" + id, {
+						method: "PUT",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(form)
+					});
+					const data = await response.json();
+					setStore({singleProduct: data});
+				} catch(error) {
+					console.log(error);
+				}
+			},
+			deleteProduct: async(id) => {
+				try{
+					const response = await fetch(process.env.BACKEND_URL + "/api/products/" + id, {
+						method: "DELETE",
+					});
+					const data = await response.json();
+				} catch(error) {
+					console.log(error);
+				}
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
@@ -44,14 +170,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getMessage: async () => {
-				try{
+				try {
 					// fetching data from the backend
 					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
 					const data = await resp.json()
 					setStore({ message: data.message })
 					// don't forget to return something, that is how the async resolves
 					return data;
-				}catch(error){
+				} catch (error) {
 					console.log("Error loading message from backend", error)
 				}
 			},
@@ -69,7 +195,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			
+
 		}
 	};
 };
