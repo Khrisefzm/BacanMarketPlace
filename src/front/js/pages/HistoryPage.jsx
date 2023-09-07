@@ -10,19 +10,22 @@ export const HistoryPage = () => {
     const navigate = useNavigate();
     useEffect(() => {
         actions.seeProducts();
-    }, [store.products])
+    }, [])
 
     const myProducts = store.products.filter(product => product.user_id == store.user.id && product.exchange_state === "pending");
 
+    const [filterProducts, setFilterProducts] = useState(myProducts);
     const [showModalOne, setShowModalOne] = useState(false);
     const [showModalTwo, setShowModalTwo] = useState(false);
-    const [selectedBotton, setSelectedBotton] = useState(false);
+
+    const [selectProduct, setSelectProduct] = useState({});
 
     const handleClose = () => {
         setShowModalOne(false);
         setShowModalTwo(false);
     }
-    const modalButton = (num) => {
+    const modalButton = (num, product) => {
+        setSelectProduct(product);
         if (num == 1) {
             setShowModalOne(true);
         } else {
@@ -33,11 +36,15 @@ export const HistoryPage = () => {
     const exchangeDone = (id) => {
         const obj = { exchange_state: "done" };
         actions.editProduct(id, obj);
+        let newFilterProducts = filterProducts.filter(product => product.id != id);
+        setFilterProducts(newFilterProducts);
         handleClose();
     }
 
     const deleteProduct = (id) => {
         actions.deleteProduct(id);
+        let newFilterProducts = filterProducts.filter(product => product.id != id);
+        setFilterProducts(newFilterProducts);
         handleClose();
     }
 
@@ -45,8 +52,8 @@ export const HistoryPage = () => {
         <div className="container tab-pane" title="myProducts">
             <h1>Mis libros para intercambio</h1>
             {
-                myProducts ?
-                    myProducts.map((product, key) => {
+                filterProducts ?
+                    filterProducts.map((product, key) => {
                         return (
                             <div className="row border p-2" key={product.id}>
                                 <div className="col">
@@ -65,50 +72,19 @@ export const HistoryPage = () => {
                                     </svg>
                                 </button>
                                 {/* Check button */}
-                                <button className="col-1 btn" onClick={() => modalButton(1)}>
+                                <button className="col-1 btn" onClick={() => modalButton(1, product)}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="2em" fill="currentColor" className="bi bi-check-lg" viewBox="0 0 16 16">
                                         <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
                                     </svg>
                                 </button>
                                 {/* Delete button */}
-                                <button className="col-1 btn" onClick={() => modalButton(2)}>
+                                <button className="col-1 btn" onClick={() => modalButton(2, product)}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="2em" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
                                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
                                         <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
                                     </svg>
                                 </button>
-                                {/* Checkbutton modal */}
-                                <Modal show={showModalOne} onHide={handleClose}>
-                                    <Modal.Header closeButton>
-                                        <Modal.Title>Intercambio realizado</Modal.Title>
-                                    </Modal.Header>
-                                    <Modal.Body>¿Realizaste correctamente el intercambio para este producto?</Modal.Body>
-                                    <Modal.Footer>
-                                        <Button variant="secondary" onClick={handleClose}>
-                                            Cerrar
-                                        </Button>
-                                        <Button variant="primary" onClick={() => { exchangeDone(product.id) }}>
-                                            Sí
-                                        </Button>
-                                    </Modal.Footer>
-                                </Modal>
-                                {/* Deletebutton Modal */}
-                                <Modal show={showModalTwo} onHide={handleClose}>
-                                    <Modal.Header closeButton>
-                                        <Modal.Title>Eliminar producto</Modal.Title>
-                                    </Modal.Header>
-                                    <Modal.Body>¿Está seguro que desea eliminar el producto?</Modal.Body>
-                                    <Modal.Footer>
-                                        <Button variant="secondary" onClick={handleClose}>
-                                            Cerrar
-                                        </Button>
-                                        <Button variant="primary" onClick={() => { deleteProduct(product.id) }}>
-                                            Sí
-                                        </Button>
-                                    </Modal.Footer>
-                                </Modal>
                             </div>
-
                         );
                     }) :
                     <>
@@ -118,7 +94,36 @@ export const HistoryPage = () => {
                         </Link>
                     </>
             }
-
+            {/* Checkbutton modal */}
+            <Modal show={showModalOne} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Intercambio realizado</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>¿Realizaste correctamente el intercambio para este producto?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Cancelar
+                    </Button>
+                    <Button variant="primary" onClick={() => { exchangeDone(selectProduct.id) }}>
+                        Sí
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            {/* Deletebutton Modal */}
+            <Modal show={showModalTwo} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Eliminar producto</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>¿Está seguro que desea eliminar el producto?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Cerrar
+                    </Button>
+                    <Button variant="primary" onClick={() => { deleteProduct(selectProduct.id) }}>
+                        Sí
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 };

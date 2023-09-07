@@ -66,11 +66,11 @@ export const AddProductForm = () => {
                     <div className="row">
                         <div className="col-lg-6 col-sm-12 mb-3">
                             <label className="form-label">Nombre del producto:</label>
-                            <input type="text" maxLength="50" className="form-control" name="name" onChange={handleInputChange}/>
+                            <input type="text" maxLength="50" className="form-control" name="name" onChange={handleInputChange} required/>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-12 mb-3">
                             <label className="form-label">Estado:</label>
-                            <select className="form-select" aria-label="Default select example" name="product_state" onChange={handleInputChange}>
+                            <select className="form-select" aria-label="Default select example" name="product_state" onChange={handleInputChange} required>
                                 <option defaultValue>Selecciona una opción</option>
                                 <option value="usado">Usado</option>
                                 <option value="nuevo">Nuevo</option>
@@ -78,7 +78,7 @@ export const AddProductForm = () => {
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-12 mb-3">
                             <label className="form-label">Categoría:</label>
-                            <select className="form-select" aria-label="Default select example" name="category" onChange={handleInputChange}>
+                            <select className="form-select" aria-label="Default select example" name="category" onChange={handleInputChange} required>
                                 <option defaultValue>Selecciona una opción</option>
                                 <option value="autoayuda">Autoayuda</option>
                                 <option value="romance">Romance</option>
@@ -90,11 +90,11 @@ export const AddProductForm = () => {
                     <div className="row mb-3">
                         <div className="col-lg-6 col-md-6 col-sm-12">
                             <label className="form-label">Autor:</label>
-                            <input type="text" maxLength="50" className="form-control" name="author" onChange={handleInputChange}/>
+                            <input type="text" maxLength="50" className="form-control" name="author" onChange={handleInputChange} />
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-12">
                             <label className="form-label">Imagen del producto</label>
-                            <input className="form-control" type="file" name="image" accept=".jpg .png" onChange={handleFileChange} />
+                            <input className="form-control" type="file" name="image" accept=".jpg .png" onChange={handleFileChange} required/>
                         </div>
                     </div>
                     {/* Tercera Fila */}
@@ -103,7 +103,7 @@ export const AddProductForm = () => {
                         <div className="row mb-3">
                             <label className="col-lg-2 col-md-3 col-sm-3 col-form-label">Libro 1 *:</label>
                             <div className="col-lg-10 col-md-9 col-sm-9">
-                               <input type="text" className="form-control" name="interested_product_one" onChange={handleInputChange} /> 
+                               <input type="text" className="form-control" name="interested_product_one" onChange={handleInputChange} required/> 
                             </div>
                         </div>
                         <div className="row mb-3">
