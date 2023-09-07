@@ -20,6 +20,7 @@ import { ComfirmExchange } from "./pages/ComfirmExchange.jsx";
 import EcommerceMain from "./pages/EcommerceMain";
 import ContactPage from "./pages/ContactPage";
 import PaymentPage from "./pages/PaymentPage";
+import DatosUsuario from "./pages/DatosUsuario";
 import { HistoryPage } from "./pages/HistoryPage.jsx";
 import { ProductInfo } from "./pages/ProductInfo.jsx";
 import { EditProductForm } from "./pages/EditProductForm.jsx";
@@ -53,6 +54,7 @@ const Layout = () => {
                         <Route element={<EcommerceMain />} path="/marketplace" />
                         <Route element={<ContactPage />} path="/contactpage/:theid" />
                         <Route element={<PaymentPage />} path="/paymentpage" />
+                        <Route element={<DatosUsuario />} path="/datosusuario" />
                         <Route element={<HistoryPage />} path="/history" />
                         <Route element={<ProductInfo />} path="/product-info/:theid" />
                         <Route element={<EditProductForm />} path="/edit-product/:theid" />
