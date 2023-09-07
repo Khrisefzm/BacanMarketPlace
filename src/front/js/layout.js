@@ -40,7 +40,7 @@ const Layout = () => {
                     <GeneralNavbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        <Route element={<Demo />} path="/demo" />
+                        {/* <Route element={<Demo />} path="/demo" /> */}
                         <Route element={<ResetPassword />} path="/ResetPassword" />
                         <Route element={<Password />} path="/password" />
                         <Route element={<Login />} path="/login" />
