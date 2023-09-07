@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { Context } from "../store/appContext";
+
 
 const PaymentPage = () => {
+  const { store, actions } = useContext(Context);
   const navigate = useNavigate(); 
   const [formData, setFormData] = useState({
     name: '',
@@ -19,13 +22,13 @@ const PaymentPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Simulación de procesamiento de pago
-    alert(`Donación de $${formData.amount} procesada con éxito`);
-
-    // Redirección al instante
-    setTimeout(() => {
-      navigate('/marketplace');
-    }, 100);
-  };
+    let response= actions.payment(formData);
+  
+        setTimeout(() => {
+          navigate('/marketplace');
+        }, 2000);
+      }
+    
 
   return (
     <div className="container mt-5">

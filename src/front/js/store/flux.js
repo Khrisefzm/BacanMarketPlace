@@ -196,6 +196,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 
+			payment: async (form) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "/api/payment", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(form)
+					})
+					// if (!response.ok) throw("There was a problem in the login request")
+					
+					if (response.status !== 200) {
+						alert("Hubo un error, por favor trate de nuevo más tarde")
+						return false;	
+					}
+
+					const data = await response.json();
+					alert(`Donación de $${form.amount} procesada con éxito`);
+					console.log(data);
+					return true;
+				}
+				catch (error) {
+					alert("Hubo un error, por favor trate de nuevo más tarde")
+				}
+			},
 		}
 	};
 };

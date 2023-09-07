@@ -162,6 +162,20 @@ def single_product(id):
 
         db.session.commit()
         return jsonify(product.serialize()), 200
+    
+@api.route('/payment', methods=['POST'])
+@cross_origin()
+def post_payment():
+    if request.method == 'POST':
+        data = request.json
+        #Incluir validaciones 
+        
+        amount=float(data.get("amount",0))
+        if amount<=0:
+            return jsonify(data), 400
+        else: 
+            return jsonify(data), 200
+    
 
 # Incluir aquí el código para asignar libros a los usuarios
 
