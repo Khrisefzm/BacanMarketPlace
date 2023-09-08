@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, Blueprint
 from api.models import db, User, Product
 from flask_bcrypt import Bcrypt
 from flask_cors import cross_origin
-import json
+import json, os
 from flask_mail import Message, Mail
 
 # JWT extended
@@ -116,11 +116,39 @@ def single_user(id):
 def resend_password():
     if request.method == 'POST':
         email = request.json
-        msg  = Message("Prueba 4geeks", sender="demo@demo.com", recipients=["danielnu04@hotmail.com"])
-        msg.body = "Mensaje de prueba"
-        mail.send(msg)
-        print(email)
-        return jsonify([]), 200
+        user_from_db = User.query.filter_by(email=email).one_or_none()
+        if not user_from_db :
+            return jsonify("El usuario no existe"), 400
+        else : 
+
+            msg  = Message("Prueba 4geeks", sender="demo@demo.com", recipients=[email])
+            access_token = create_access_token(identity=user_from_db.id)
+            msg.body = os.environ["FRONT_URL"]+"/password/"+access_token
+            mail.send(msg)
+            return jsonify([]), 200
+
+@api.route('/verifyemailtoken', methods=["GET"])
+@jwt_required()
+def verify_email_token(): 
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return jsonify(False), 404
+    else: 
+        return jsonify(True), 200
+    
+@api.route('/changepassword', methods=["PUT"])
+@jwt_required()
+def change_password(): 
+    password = request.json.get("password" , "")
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).one_or_none()
+    print(user)
+    if user is None:
+        return jsonify({"msg": "User not found"}), 404
+    user.password = bcrypt.generate_password_hash(password).decode("utf-8"),
+    db.session.commit()
+    return jsonify(user.password), 200
 
 
 @api.route('/products', methods=['POST', 'GET'])
