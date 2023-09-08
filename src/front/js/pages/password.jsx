@@ -19,10 +19,12 @@ export const Password = () => {
         password: password
     }
     const navigate = useNavigate()
-    const handleSubmit = () => {
+    const handleSubmit = async() => {
         verifyMatch()
-        actions.changePassword(params.token, body)
-        if (actions.changePassword(params.token, body)) {
+        const response = await actions.changePassword(params.token, body)
+        console.log(response)
+        
+        if (response) {
             navigate("/login")
         }
     }

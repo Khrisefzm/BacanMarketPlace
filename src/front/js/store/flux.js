@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			products: [],
 			singleProduct: {},
 			message: null,
+			state: false,
 			demo: [
 				{
 					title: "FIRST",
@@ -90,7 +91,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			changePassword: async (token, password) => {
-				console.log(token, password)
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/changepassword", {
 						method: "PUT",
@@ -101,10 +101,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 					const data = await response.json();
-					console.log(data);
-					if (response.ok) {
-						return data
-					}
 					return true
 				} catch (error) {
 					console.log(error);
