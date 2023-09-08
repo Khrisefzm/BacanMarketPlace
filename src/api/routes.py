@@ -116,18 +116,22 @@ def single_user(id):
 def resend_password():
     if request.method == 'POST':
         email = request.json
-        msg  = Message("Prueba 4geeks", sender="demo@demo.com", recipients=[email])
-        access_token = create_access_token(identity=email)
-        msg.body = os.environ["FRONT_URL"]+"/password/"+access_token
-        mail.send(msg)
-        print(email)
-        return jsonify([]), 200
+        user_from_db = User.query.filter_by(email=email).one_or_none()
+        if not user_from_db :
+            return jsonify("El usuario no existe"), 400
+        else : 
+
+            msg  = Message("Prueba 4geeks", sender="demo@demo.com", recipients=[email])
+            access_token = create_access_token(identity=user_from_db.id)
+            msg.body = os.environ["FRONT_URL"]+"/password/"+access_token
+            mail.send(msg)
+            return jsonify([]), 200
 
 @api.route('/verifyemailtoken', methods=["GET"])
 @jwt_required()
 def verify_email_token(): 
-    email = get_jwt_identity()
-    user = User.query.filter_by(email=email).first()
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
     if user is None:
         return jsonify(False), 404
     else: 
@@ -136,15 +140,15 @@ def verify_email_token():
 @api.route('/changepassword', methods=["PUT"])
 @jwt_required()
 def change_password(): 
-    password = request.json
-    email = get_jwt_identity()
-    print(password,email)
-    user = User.query.filter_by(email=email).first()
+    password = request.json.get("password" , "")
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).one_or_none()
+    print(user)
     if user is None:
         return jsonify({"msg": "User not found"}), 404
     user.password = bcrypt.generate_password_hash(password).decode("utf-8"),
     db.session.commit()
-    return jsonify({"msg": "Password changed successfully "}), 200
+    return jsonify(user.password), 200
 
 
 @api.route('/products', methods=['POST', 'GET'])

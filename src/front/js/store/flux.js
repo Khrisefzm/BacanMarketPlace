@@ -96,6 +96,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						method: "PUT",
 						body: JSON.stringify(password),
 						headers: {
+							"Content-Type": "application/json",
 							Authorization: "Bearer " + token,
 						}
 					});
@@ -104,7 +105,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.ok) {
 						return data
 					}
-					return data
+					return true
 				} catch (error) {
 					console.log(error);
 					return false
@@ -219,9 +220,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					if (response.ok) {
 						return true;
-					} else {
+					}
+					else if (response.status === 400) alert("Correo Electrónico no válido");
+					else {
 						return false;
 					}
+
+					const data = await response.json();
+					localStorage.setItem("jwt-token", data.access_token);
+					setStore({ token: data.access_token });
 
 
 				} catch (error) {
