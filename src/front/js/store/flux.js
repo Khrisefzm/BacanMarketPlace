@@ -2,9 +2,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: null,
-			user:{},
+			user: {},
 			users: [],
-			singleUser:{},
+			singleUser: {},
 			products: [],
 			singleProduct: {},
 			message: null,
@@ -53,9 +53,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				localStorage.removeItem("jwt-token");
 				setStore({ token: null });
 			},
-			seeUser: async() => {
+			seeUser: async () => {
 				const store = getStore();
-				try{
+				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/user", {
 						method: "GET",
 						headers: {
@@ -63,14 +63,57 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 					const data = await response.json();
-					setStore({user: data});
-				} catch(error) {
+					setStore({ user: data });
+				} catch (error) {
 					console.log(error);
 				}
 			},
-			editUser: async(form) => {
+
+			verifyEmailToken: async (token) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "/api/verifyemailtoken", {
+						method: "GET",
+						headers: {
+							Authorization: "Bearer " + token,
+						}
+					});
+					const data = await response.json();
+					console.log(data);
+					if (data == true) {
+						return true
+					}
+					return false
+				} catch (error) {
+					console.log(error);
+					return false
+				}
+			},
+
+			changePassword: async (token, password) => {
+				console.log(token, password)
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "/api/changepassword", {
+						method: "PUT",
+						body: JSON.stringify(password),
+						headers: {
+							Authorization: "Bearer " + token,
+						}
+					});
+					const data = await response.json();
+					console.log(data);
+					if (response.ok) {
+						return data
+					}
+					return data
+				} catch (error) {
+					console.log(error);
+					return false
+				}
+			},
+
+			editUser: async (form) => {
 				const store = getStore();
-				try{
+				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/user", {
 						method: "PUT",
 						headers: {
@@ -80,31 +123,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(form)
 					});
 					const data = await response.json();
-					setStore({user: data});
+					setStore({ user: data });
 					alert("Se realizaron los cambios")
-				} catch(error) {
+				} catch (error) {
 					alert("Hubo un error, por favor trate de nuevo más tarde");
 				}
 			},
-			allUsers: async() => {
-				try{
+			allUsers: async () => {
+				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/users");
 					const data = await response.json();
-					setStore({users: data});
-				} catch(error) {
+					setStore({ users: data });
+				} catch (error) {
 					console.log(error);
 				}
 			},
-			singleUser: async(id) => {
-				try{
+			singleUser: async (id) => {
+				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/user/" + id);
 					const data = await response.json();
-					setStore({singleUser: data});
-				} catch(error) {
+					setStore({ singleUser: data });
+				} catch (error) {
 					console.log(error);
 				}
 			},
-			addProduct: async(form) => {
+			addProduct: async (form) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/products", {
 						method: "POST",
@@ -119,44 +162,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 					alert("Hubo un error, por favor trate de nuevo más tarde")
 				}
 			},
-			seeProducts: async() => {
-				try{
+			seeProducts: async () => {
+				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/products");
 					const data = await response.json();
-					setStore({products: data});
-				} catch(error) {
+					setStore({ products: data });
+				} catch (error) {
 					console.log(error);
 				}
 			},
-			singleProduct: async(id) => {
-				try{
+			singleProduct: async (id) => {
+				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/products/" + id);
 					const data = await response.json();
-					setStore({singleProduct: data});
-				} catch(error) {
+					setStore({ singleProduct: data });
+				} catch (error) {
 					console.log(error);
 				}
 			},
-			editProduct: async(id, form) => {
-				try{
+			editProduct: async (id, form) => {
+				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/products/" + id, {
 						method: "PUT",
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify(form)
 					});
 					const data = await response.json();
-					setStore({singleProduct: data});
-				} catch(error) {
+					setStore({ singleProduct: data });
+				} catch (error) {
 					console.log(error);
 				}
 			},
-			deleteProduct: async(id) => {
-				try{
+			deleteProduct: async (id) => {
+				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/products/" + id, {
 						method: "DELETE",
 					});
 					const data = await response.json();
-				} catch(error) {
+				} catch (error) {
 					console.log(error);
 				}
 			},
@@ -167,8 +210,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			sendRecoveryPass: async (email) => {
 				try {
-					const response = await fetch(process.env.BACKEND_URL + "/api/resendpass",{
-						method:'POST', 
+					const response = await fetch(process.env.BACKEND_URL + "/api/resendpass", {
+						method: 'POST',
 						headers: {
 							"Content-Type": "application/json"
 						},
@@ -179,10 +222,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					} else {
 						return false;
 					}
-				
-					
+
+
 				} catch (error) {
-					
+
 				}
 
 			},
@@ -222,10 +265,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(form)
 					})
 					// if (!response.ok) throw("There was a problem in the login request")
-					
+
 					if (response.status !== 200) {
 						alert("Hubo un error, por favor trate de nuevo más tarde")
-						return false;	
+						return false;
 					}
 
 					const data = await response.json();
