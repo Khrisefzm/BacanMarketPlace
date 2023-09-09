@@ -8,17 +8,20 @@ export const HistoryPage = () => {
 
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
-    useEffect(() => {
-        actions.seeProducts();
-    }, [])
-
     const myProducts = store.products.filter(product => product.user_id == store.user.id && product.exchange_state === "pending");
-
     const [filterProducts, setFilterProducts] = useState(myProducts);
     const [showModalOne, setShowModalOne] = useState(false);
     const [showModalTwo, setShowModalTwo] = useState(false);
-
     const [selectProduct, setSelectProduct] = useState({});
+
+    useEffect(() => {
+        setFilterProducts(myProducts);
+    }, [store.user])
+
+    console.log(store.products);
+    console.log(store.user);
+    console.log(myProducts);
+    console.log(filterProducts);
 
     const handleClose = () => {
         setShowModalOne(false);
@@ -38,7 +41,7 @@ export const HistoryPage = () => {
         actions.editProduct(id, obj);
         if (id) {
             let newFilterProducts = filterProducts.filter(product => product.id != id);
-            setFilterProducts(newFilterProducts); 
+            setFilterProducts(newFilterProducts);
         }
         handleClose();
     }
@@ -47,7 +50,7 @@ export const HistoryPage = () => {
         actions.deleteProduct(id);
         if (id) {
             let newFilterProducts = filterProducts.filter(product => product.id != id);
-            setFilterProducts(newFilterProducts); 
+            setFilterProducts(newFilterProducts);
         }
         handleClose();
     }
@@ -56,7 +59,7 @@ export const HistoryPage = () => {
         <div className="container tab-pane" title="myProducts">
             <h1>Mis libros para intercambio</h1>
             {
-                filterProducts ?
+                (filterProducts && filterProducts != []) ?
                     filterProducts.map((product, key) => {
                         return (
                             <div className="row border p-2" key={product.id}>
@@ -99,20 +102,20 @@ export const HistoryPage = () => {
                     </>
             }
             {/* Checkbutton modal */}
-            <BasicModal 
-                title={"Intercambio realizado"} 
-                question={"¿Realizaste correctamente el intercambio para este producto?"} 
+            <BasicModal
+                title={"Intercambio realizado"}
+                question={"¿Realizaste correctamente el intercambio para este producto?"}
                 functionShow={showModalOne}
                 funtionClose={handleClose}
-                funtionOnClic={()=>{exchangeDone(selectProduct.id)}}
+                funtionOnClic={() => { exchangeDone(selectProduct.id) }}
             />
             {/* Deletebutton Modal */}
-            <BasicModal 
-                title={"Eliminar producto"} 
-                question={"¿Está seguro que desea eliminar el producto?"} 
+            <BasicModal
+                title={"Eliminar producto"}
+                question={"¿Está seguro que desea eliminar el producto?"}
                 functionShow={showModalTwo}
                 funtionClose={handleClose}
-                funtionOnClic={()=>{deleteProduct(selectProduct.id)}}
+                funtionOnClic={() => { deleteProduct(selectProduct.id) }}
             />
         </div>
     )

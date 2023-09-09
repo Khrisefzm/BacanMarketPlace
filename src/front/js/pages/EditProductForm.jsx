@@ -22,6 +22,7 @@ export const EditProductForm = () => {
         user_id: store.user.id
     });
 
+    console.log(store.products);
     useEffect(() => {
         actions.singleProduct(params.theid);
     }, []);
