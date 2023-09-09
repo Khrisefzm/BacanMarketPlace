@@ -37,16 +37,13 @@ export const Registro = () => {
                 body: JSON.stringify(formInfo)
             })
                 .then(response => {
-                    if (response.status === 401) {
-                        console.log("Invalid credentials")
+                    if (response.status === 406) {
+                        alert("Este correo electrónico ya tienen una cuenta registrada")
                     }
-                    else if (response.status === 400) {
-                        console.log("Invalid email or password format")
+                    else if (response.status === 409) {
+                        alert("Usuario no valido");
                     }
-
-                    if (!response.ok) console.log("there was an error")
-                    else navigate("/login") //throw Error(response.statusText);
-
+                    else navigate("/login");
                     return response.json();
                 })
                 .then(data => { return data })
