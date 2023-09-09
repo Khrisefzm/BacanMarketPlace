@@ -37,7 +37,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false;
 					}
 					const data = await response.json();
-					console.log(data);
 					localStorage.setItem("jwt-token", data.access_token);
 					setStore({ token: data.access_token });
 					return true;
@@ -48,7 +47,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			tokenFomLocalStorage: () => {
 				const token = localStorage.getItem("jwt-token");
-				if (token && token != "" && token != undefined) setStore({ token: token });;
+				if (token && token != "" && token != undefined) setStore({ token: token });
 			},
 			logout: () => {
 				localStorage.removeItem("jwt-token");

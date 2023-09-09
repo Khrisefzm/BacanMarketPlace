@@ -51,7 +51,6 @@ export const Registro = () => {
         } else {
             console.log("las contraseñas no coinciden")
         }
-
     }
 
     return (
