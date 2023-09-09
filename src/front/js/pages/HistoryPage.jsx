@@ -3,7 +3,6 @@ import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 import { BasicModal } from "../component/BasicModal.jsx";
 
-
 export const HistoryPage = () => {
 
     const { store, actions } = useContext(Context);
@@ -13,15 +12,10 @@ export const HistoryPage = () => {
     const [showModalOne, setShowModalOne] = useState(false);
     const [showModalTwo, setShowModalTwo] = useState(false);
     const [selectProduct, setSelectProduct] = useState({});
-
+//When recharge, render again:
     useEffect(() => {
         setFilterProducts(myProducts);
     }, [store.user])
-
-    console.log(store.products);
-    console.log(store.user);
-    console.log(myProducts);
-    console.log(filterProducts);
 
     const handleClose = () => {
         setShowModalOne(false);
