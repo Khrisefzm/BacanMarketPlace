@@ -22,7 +22,7 @@ export const Login = () => {
         actions.login(formInfo);
     }
 
-    if (store.token && store.token !== "" && store.token !== undefined) navigate("/marketplace")
+    if (store.token && store.token !== "" && store.token !== undefined) navigate("/marketplace");
     return (
         <div className="container-fluid">
             <div className="col-lg-3 col-md-6 col-sm-12  m-auto border rounded mt-5 p-3">
