@@ -68,6 +68,8 @@ export const EditProductForm = () => {
     const sentForm = e => {
         e.preventDefault();
         actions.editProduct(product.id, formInfo);
+        //falta actualizar la vista del producto editado
+        // actions.seeProducts();
         navigate("/product-info/" + product.id);
     };
 

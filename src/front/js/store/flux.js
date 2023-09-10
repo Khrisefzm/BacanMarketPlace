@@ -68,7 +68,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
-
+			
 			verifyEmailToken: async (token) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/verifyemailtoken", {
@@ -106,7 +106,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false
 				}
 			},
-
+			// seeActualUser: async (token) => { setear user con los datos que brinda el token
+			// 	try {
+			// 		const response = await fetch(process.env.BACKEND_URL + "/api/verifyemailtoken", {
+			// 			method: "GET",
+			// 			headers: {
+			// 				Authorization: "Bearer " + token,
+			// 			}
+			// 		});
+			// 		const data = await response.json();
+			// 		console.log(data);
+			// 		if (data == true) {
+			// 			return true
+			// 		}
+			// 		return false
+			// 	} catch (error) {
+			// 		console.log(error);
+			// 		return false
+			// 	}
+			// },
 			editUser: async (form) => {
 				const store = getStore();
 				try {
@@ -144,6 +162,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			addProduct: async (form) => {
+				const store = getStore();
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/products", {
 						method: "POST",
@@ -151,6 +170,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(form)
 					})
 					const data = await response.json();
+					store.products.push(data);
+					setStore(store.product);
 					alert("Producto añadido")
 					return data;
 				}
@@ -177,6 +198,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			editProduct: async (id, form) => {
+				const store = getStore();
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/products/" + id, {
 						method: "PUT",
@@ -184,6 +206,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(form)
 					});
 					const data = await response.json();
+					const index = store.products.findIndex(product=>{product.id==id});
+					store.products[index] = data; //revisar data
+					setStore({ products: store.products});
 					setStore({ singleProduct: data });
 				} catch (error) {
 					console.log(error);

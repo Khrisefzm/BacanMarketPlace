@@ -42,7 +42,7 @@ const EcommerceMain = () => {
         <>
             <div className="container mt-5">
                 <div className="row">
-                    {products.map(product => {
+                    {products && products.map(product => {
                         let user = filterUserById(product.user_id);
                         return (
                             <div className="col-md-4 mb-4" key={product.id}>

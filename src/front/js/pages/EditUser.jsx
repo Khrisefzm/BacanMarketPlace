@@ -13,7 +13,7 @@ export const EditUser = () => {
     city: store.user.city || "",
     country: store.user.country || "",
     email: store.user.email || "",
-  };
+  };  
 
   const [form, setForm] = useState(initialFormState);
 

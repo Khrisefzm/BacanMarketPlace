@@ -7,6 +7,10 @@ export const HistoryPage = () => {
 
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
+    useEffect(()=>{
+        actions.seeProducts();
+    },[])
+    //Only the products of actual user:
     const myProducts = store.products.filter(product => product.user_id == store.user.id && product.exchange_state === "pending");
     const [filterProducts, setFilterProducts] = useState(myProducts);
     const [showModalOne, setShowModalOne] = useState(false);
