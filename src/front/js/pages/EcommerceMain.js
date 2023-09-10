@@ -38,8 +38,6 @@ const EcommerceMain = () => {
     };
 
     const products = store.products.filter(product => product.user_id != store.user.id && product.exchange_state === "pending");
-    console.log(products);
-    console.log(store.users);
     return (
         <>
             <div className="container mt-5">

@@ -38,18 +38,16 @@ export const HistoryPage = () => {
         const obj = { exchange_state: "done" };
         actions.editProduct(id, obj);
         if (id) {
-            let newFilterProducts = filterProducts.filter(product => product.id != id);
+            let newFilterProducts = store.products.filter(product => product.user_id == store.user.id && product.exchange_state === "pending" && product.id != id);
+            // let newFilterProducts = filterProducts.filter(product => product.id != id);
             setFilterProducts(newFilterProducts);
+            actions.seeProducts();
         }
         handleClose();
     }
 
     const deleteProduct = (id) => {
         actions.deleteProduct(id);
-        if (id) {
-            let newFilterProducts = filterProducts.filter(product => product.id != id);
-            setFilterProducts(newFilterProducts);
-        }
         handleClose();
     }
 

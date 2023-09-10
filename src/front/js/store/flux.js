@@ -215,11 +215,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			deleteProduct: async (id) => {
+				const store = getStore();
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/products/" + id, {
 						method: "DELETE",
 					});
 					const data = await response.json();
+					const newProducts = store.products.filter(product => product.id != id);
+					setStore({ products: newProducts});
 				} catch (error) {
 					console.log(error);
 				}
