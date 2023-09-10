@@ -207,7 +207,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 					const data = await response.json();
 					const index = store.products.findIndex(product=>{product.id==id});
-					store.products[index] = data; //revisar data
+					store.products[index] = data;
+					console.log(data);
 					setStore({ products: store.products});
 					setStore({ singleProduct: data });
 				} catch (error) {

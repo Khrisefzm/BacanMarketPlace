@@ -16,6 +16,8 @@ export const HistoryPage = () => {
     const [showModalOne, setShowModalOne] = useState(false);
     const [showModalTwo, setShowModalTwo] = useState(false);
     const [selectProduct, setSelectProduct] = useState({});
+    console.log(myProducts);
+    console.log(filterProducts);
 //When recharge, render again:
     useEffect(() => {
         setFilterProducts(myProducts);
@@ -37,6 +39,7 @@ export const HistoryPage = () => {
     const exchangeDone = (id) => {
         const obj = { exchange_state: "done" };
         actions.editProduct(id, obj);
+        actions.seeProducts();
         if (id) {
             let newFilterProducts = store.products.filter(product => product.user_id == store.user.id && product.exchange_state === "pending" && product.id != id);
             // let newFilterProducts = filterProducts.filter(product => product.id != id);
@@ -44,6 +47,8 @@ export const HistoryPage = () => {
             actions.seeProducts();
         }
         handleClose();
+        console.log(myProducts);
+        console.log(filterProducts); 
     }
 
     const deleteProduct = (id) => {
