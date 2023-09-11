@@ -7,7 +7,6 @@ export const EditProductForm = () => {
     const params = useParams();
     const navigate = useNavigate();
 
-    const [formInfo, setFormInfo] = useState({})
     //     name: store.singleProduct.name || "",
     //     product_state: store.singleProduct.product_state || "",
     //     category: store.singleProduct.category || "",
@@ -23,23 +22,29 @@ export const EditProductForm = () => {
     useEffect(() => {
         actions.singleProduct(params.theid);
     }, []);
-    useEffect(()=>{
-        console.log("estas aqui");
-        setFormInfo({
-            name: store.singleProduct.name,
-            product_state: store.singleProduct.product_state,
-            category: store.singleProduct.category,
-            author: store.singleProduct.author,
-            description: store.singleProduct.description,
-            image: store.singleProduct.image,
-            interested_product_one: store.singleProduct.interested_product_one,
-            interested_product_two: store.singleProduct.interested_product_two,
-            interested_product_three: store.singleProduct.interested_product_three,
-            exchange_state: store.singleProduct.exchange_state,
-            user_id: store.user.id
-        })
-    },[store.singleProduct])
 
+    const initialFormState = {
+        name: store.singleProduct.name,
+        product_state: store.singleProduct.product_state,
+        category: store.singleProduct.category,
+        author: store.singleProduct.author,
+        description: store.singleProduct.description,
+        image: store.singleProduct.image,
+        interested_product_one: store.singleProduct.interested_product_one,
+        interested_product_two: store.singleProduct.interested_product_two,
+        interested_product_three: store.singleProduct.interested_product_three,
+        exchange_state: store.singleProduct.exchange_state,
+        user_id: store.user.id
+    };
+    const [formInfo, setFormInfo] = useState(initialFormState);
+    console.log(store.singleProduct);
+    useEffect(() => {
+        if (store.singleProduct) {
+            setFormInfo(initialFormState);
+        }
+    }, [store.singleProduct])
+
+    console.log(formInfo);
     const product = store.singleProduct;
 
     const handleFileChange = e => {
@@ -61,7 +66,7 @@ export const EditProductForm = () => {
     };
 
     const handleInputChange = e => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setFormInfo({ ...formInfo, [name]: value });
     };
 
@@ -69,7 +74,7 @@ export const EditProductForm = () => {
         e.preventDefault();
         actions.editProduct(product.id, formInfo);
         //falta actualizar la vista del producto editado
-        // actions.seeProducts();
+        actions.seeProducts();
         navigate("/product-info/" + product.id);
     };
 

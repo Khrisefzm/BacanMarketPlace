@@ -68,7 +68,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
-			
 			verifyEmailToken: async (token) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/verifyemailtoken", {
@@ -88,7 +87,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false
 				}
 			},
-
 			changePassword: async (token, password) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/changepassword", {
@@ -206,10 +204,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(form)
 					});
 					const data = await response.json();
-					const index = store.products.findIndex(product=>{product.id==id});
+					const index = store.products.findIndex(product => {product.id==id});
 					store.products[index] = data;
-					console.log(data);
-					setStore({ products: store.products});
+					const newProducts = store.products;
+					setStore({ products: newProducts});
 					setStore({ singleProduct: data });
 				} catch (error) {
 					console.log(error);
@@ -249,16 +247,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					else {
 						return false;
 					}
-
 					const data = await response.json();
 					localStorage.setItem("jwt-token", data.access_token);
 					setStore({ token: data.access_token });
-
-
 				} catch (error) {
-
 				}
-
 			},
 
 			getMessage: async () => {

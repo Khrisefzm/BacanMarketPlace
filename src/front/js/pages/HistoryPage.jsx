@@ -41,22 +41,22 @@ export const HistoryPage = () => {
         actions.editProduct(id, obj);
         actions.seeProducts();
         if (id) {
-            let newFilterProducts = store.products.filter(product => product.user_id == store.user.id && product.exchange_state === "pending" && product.id != id);
+            let newFilterProducts = filterProducts.filter(product => product.user_id == store.user.id && product.exchange_state === "pending" && product.id != id);
             setFilterProducts(newFilterProducts);
             actions.seeProducts();
         }
         handleClose();
-        console.log(myProducts);
-        console.log(filterProducts); 
     }
 
     const deleteProduct = (id) => {
+        actions.seeProducts();
         if (id) {
-            let newFilterProducts = store.products.filter(product => product.id != id);
+            let newFilterProducts = filterProducts.filter(product => product.user_id == store.user.id && product.exchange_state === "pending" && product.id != id);
             setFilterProducts(newFilterProducts);
             actions.seeProducts();
         }
         actions.deleteProduct(id);
+        actions.seeProducts();
         handleClose();
     }
 
