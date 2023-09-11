@@ -37,7 +37,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false;
 					}
 					const data = await response.json();
-					console.log(data);
 					localStorage.setItem("jwt-token", data.access_token);
 					setStore({ token: data.access_token });
 					return true;
@@ -48,7 +47,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			tokenFomLocalStorage: () => {
 				const token = localStorage.getItem("jwt-token");
-				if (token && token != "" && token != undefined) setStore({ token: token });;
+				if (token && token != "" && token != undefined) setStore({ token: token });
 			},
 			logout: () => {
 				localStorage.removeItem("jwt-token");
@@ -69,7 +68,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
-
 			verifyEmailToken: async (token) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/verifyemailtoken", {
@@ -89,7 +87,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false
 				}
 			},
-
 			changePassword: async (token, password) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/changepassword", {
@@ -107,7 +104,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false
 				}
 			},
-
+			// seeActualUser: async (token) => { setear user con los datos que brinda el token
+			// 	try {
+			// 		const response = await fetch(process.env.BACKEND_URL + "/api/verifyemailtoken", {
+			// 			method: "GET",
+			// 			headers: {
+			// 				Authorization: "Bearer " + token,
+			// 			}
+			// 		});
+			// 		const data = await response.json();
+			// 		console.log(data);
+			// 		if (data == true) {
+			// 			return true
+			// 		}
+			// 		return false
+			// 	} catch (error) {
+			// 		console.log(error);
+			// 		return false
+			// 	}
+			// },
 			editUser: async (form) => {
 				const store = getStore();
 				try {
@@ -145,6 +160,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			addProduct: async (form) => {
+				const store = getStore();
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/products", {
 						method: "POST",
@@ -152,6 +168,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(form)
 					})
 					const data = await response.json();
+					store.products.push(data);
+					setStore(store.product);
 					alert("Producto añadido")
 					return data;
 				}
@@ -178,6 +196,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			editProduct: async (id, form) => {
+				const store = getStore();
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/products/" + id, {
 						method: "PUT",
@@ -185,17 +204,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(form)
 					});
 					const data = await response.json();
+					const index = store.products.findIndex(product => {product.id==id});
+					store.products[index] = data;
+					const newProducts = store.products;
+					setStore({ products: newProducts});
 					setStore({ singleProduct: data });
 				} catch (error) {
 					console.log(error);
 				}
 			},
 			deleteProduct: async (id) => {
+				const store = getStore();
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/products/" + id, {
 						method: "DELETE",
 					});
 					const data = await response.json();
+					const newProducts = store.products.filter(product => product.id != id);
+					setStore({ products: newProducts});
 				} catch (error) {
 					console.log(error);
 				}
@@ -221,16 +247,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					else {
 						return false;
 					}
-
 					const data = await response.json();
 					localStorage.setItem("jwt-token", data.access_token);
 					setStore({ token: data.access_token });
-
-
 				} catch (error) {
-
 				}
-
 			},
 
 			getMessage: async () => {

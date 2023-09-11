@@ -36,14 +36,14 @@ const EcommerceMain = () => {
         const singleUser = users.filter(user => user.id == id)
         return singleUser;
     };
-    const products = store.products.filter(product => product.user_id != store.user.id && product.exchange_state === "pending");
 
+    const products = store.products.filter(product => product.user_id != store.user.id && product.exchange_state === "pending");
     return (
         <>
             <div className="container mt-5">
                 <div className="row">
-                    {products.map(product => {
-                        let user = filterUserById(product.user_id);
+                    {products && products.map(product => {
+                        const user = filterUserById(product.user_id);
                         return (
                             <div className="col-md-4 mb-4" key={product.id}>
                                 <div className="card">

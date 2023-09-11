@@ -7,26 +7,46 @@ export const EditProductForm = () => {
     const params = useParams();
     const navigate = useNavigate();
 
-    // Inicializa el estado con los valores actuales del producto
-    const [formInfo, setFormInfo] = useState({
-        name: store.singleProduct.name || "",
-        product_state: store.singleProduct.product_state || "",
-        category: store.singleProduct.category || "",
-        author: store.singleProduct.author || "",
-        description: store.singleProduct.description || "",
-        image: store.singleProduct.image || "",
-        interested_product_one: store.singleProduct.interested_product_one || "",
-        interested_product_two: store.singleProduct.interested_product_two || "",
-        interested_product_three: store.singleProduct.interested_product_three || "",
-        exchange_state: store.singleProduct.exchange_state || "",
-        user_id: store.user.id
-    });
-
+    //     name: store.singleProduct.name || "",
+    //     product_state: store.singleProduct.product_state || "",
+    //     category: store.singleProduct.category || "",
+    //     author: store.singleProduct.author || "",
+    //     description: store.singleProduct.description || "",
+    //     image: store.singleProduct.image || "",
+    //     interested_product_one: store.singleProduct.interested_product_one || "",
+    //     interested_product_two: store.singleProduct.interested_product_two || "",
+    //     interested_product_three: store.singleProduct.interested_product_three || "",
+    //     exchange_state: store.singleProduct.exchange_state || "",
+    //     user_id: store.user.id
+    // });
     useEffect(() => {
         actions.singleProduct(params.theid);
     }, []);
 
+    const initialFormState = {
+        name: store.singleProduct.name,
+        product_state: store.singleProduct.product_state,
+        category: store.singleProduct.category,
+        author: store.singleProduct.author,
+        description: store.singleProduct.description,
+        image: store.singleProduct.image,
+        interested_product_one: store.singleProduct.interested_product_one,
+        interested_product_two: store.singleProduct.interested_product_two,
+        interested_product_three: store.singleProduct.interested_product_three,
+        exchange_state: store.singleProduct.exchange_state,
+        user_id: store.user.id
+    };
+    const [formInfo, setFormInfo] = useState(initialFormState);
+    console.log(store.singleProduct);
+    useEffect(() => {
+        if (store.singleProduct) {
+            setFormInfo(initialFormState);
+        }
+    }, [store.singleProduct])
+
+    console.log(formInfo);
     const product = store.singleProduct;
+
     const handleFileChange = e => {
         const selectedFile = e.target.files[0];
         const name = e.target.name;
@@ -46,15 +66,15 @@ export const EditProductForm = () => {
     };
 
     const handleInputChange = e => {
-        const name = e.target.name;
-        const value = e.target.value;
-        // Copia todos los valores actuales y actualiza solo el campo específico
+        const { name, value } = e.target;
         setFormInfo({ ...formInfo, [name]: value });
     };
 
     const sentForm = e => {
         e.preventDefault();
         actions.editProduct(product.id, formInfo);
+        //falta actualizar la vista del producto editado
+        actions.seeProducts();
         navigate("/product-info/" + product.id);
     };
 

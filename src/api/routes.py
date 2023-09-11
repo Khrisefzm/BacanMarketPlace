@@ -40,6 +40,10 @@ def create_user():
         city=data.get("city"),
         password=bcrypt.generate_password_hash(data.get("password")).decode("utf-8"),
     )
+    if User.query.filter_by(email=user.email).one_or_none() :
+        return jsonify("El correo electrónico ya ha sido registrado"), 406
+    if User.query.filter_by(user_name=user.user_name).one_or_none() :
+        return jsonify("El usuario ya ha sido registrado, pruebe con otro nombre"), 409
     db.session.add(user)
     db.session.commit()
     return jsonify(user.serialize()), 200

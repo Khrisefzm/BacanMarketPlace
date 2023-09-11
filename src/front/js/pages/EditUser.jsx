@@ -6,15 +6,18 @@ export const EditUser = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({
+  const initialFormState = {
     name: store.user.name || "",
     last_name: store.user.last_name || "",
     cellphone: store.user.cellphone || "",
     city: store.user.city || "",
     country: store.user.country || "",
     email: store.user.email || "",
-  })
+  };  
 
+  const [form, setForm] = useState(initialFormState);
+
+  console.log(form);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
@@ -22,8 +25,12 @@ export const EditUser = () => {
 
   const handleSaveClick = () => {
     actions.editUser(form);
-    navigate("/datosusuario")
+    navigate("/datosusuario");
   };
+
+  const handleCancelClick = () => {
+    navigate("/datosusuario");
+  }
 
   return (
     <div className="container mt-5">
@@ -97,7 +104,8 @@ export const EditUser = () => {
               onChange={handleInputChange}
             />
           </div>
-          <button className="btn btn-primary" onClick={handleSaveClick}>Guardar</button>
+          <button className="btn btn-warning" onClick={handleSaveClick}>Guardar</button>
+          <button className="btn btn-danger ms-3" onClick={handleCancelClick}>Atrás</button>
         </div>
       </div>
     </div>

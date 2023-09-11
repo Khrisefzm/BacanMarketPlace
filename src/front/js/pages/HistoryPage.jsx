@@ -3,22 +3,25 @@ import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 import { BasicModal } from "../component/BasicModal.jsx";
 
-
 export const HistoryPage = () => {
 
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
-    useEffect(() => {
+    useEffect(()=>{
         actions.seeProducts();
-    }, [])
-
+    },[])
+    //Only the products of actual user:
     const myProducts = store.products.filter(product => product.user_id == store.user.id && product.exchange_state === "pending");
-
     const [filterProducts, setFilterProducts] = useState(myProducts);
     const [showModalOne, setShowModalOne] = useState(false);
     const [showModalTwo, setShowModalTwo] = useState(false);
-
     const [selectProduct, setSelectProduct] = useState({});
+    console.log(myProducts);
+    console.log(filterProducts);
+//When recharge, render again:
+    useEffect(() => {
+        setFilterProducts(myProducts);
+    }, [store.user])
 
     const handleClose = () => {
         setShowModalOne(false);
@@ -36,19 +39,24 @@ export const HistoryPage = () => {
     const exchangeDone = (id) => {
         const obj = { exchange_state: "done" };
         actions.editProduct(id, obj);
+        actions.seeProducts();
         if (id) {
-            let newFilterProducts = filterProducts.filter(product => product.id != id);
-            setFilterProducts(newFilterProducts); 
+            let newFilterProducts = filterProducts.filter(product => product.user_id == store.user.id && product.exchange_state === "pending" && product.id != id);
+            setFilterProducts(newFilterProducts);
+            actions.seeProducts();
         }
         handleClose();
     }
 
     const deleteProduct = (id) => {
-        actions.deleteProduct(id);
+        actions.seeProducts();
         if (id) {
-            let newFilterProducts = filterProducts.filter(product => product.id != id);
-            setFilterProducts(newFilterProducts); 
+            let newFilterProducts = filterProducts.filter(product => product.user_id == store.user.id && product.exchange_state === "pending" && product.id != id);
+            setFilterProducts(newFilterProducts);
+            actions.seeProducts();
         }
+        actions.deleteProduct(id);
+        actions.seeProducts();
         handleClose();
     }
 
@@ -56,7 +64,7 @@ export const HistoryPage = () => {
         <div className="container tab-pane" title="myProducts">
             <h1>Mis libros para intercambio</h1>
             {
-                filterProducts ?
+                (filterProducts && filterProducts != []) ?
                     filterProducts.map((product, key) => {
                         return (
                             <div className="row border p-2" key={product.id}>
@@ -99,20 +107,20 @@ export const HistoryPage = () => {
                     </>
             }
             {/* Checkbutton modal */}
-            <BasicModal 
-                title={"Intercambio realizado"} 
-                question={"¿Realizaste correctamente el intercambio para este producto?"} 
+            <BasicModal
+                title={"Intercambio realizado"}
+                question={"¿Realizaste correctamente el intercambio para este producto?"}
                 functionShow={showModalOne}
                 funtionClose={handleClose}
-                funtionOnClic={()=>{exchangeDone(selectProduct.id)}}
+                funtionOnClic={() => { exchangeDone(selectProduct.id) }}
             />
             {/* Deletebutton Modal */}
-            <BasicModal 
-                title={"Eliminar producto"} 
-                question={"¿Está seguro que desea eliminar el producto?"} 
+            <BasicModal
+                title={"Eliminar producto"}
+                question={"¿Está seguro que desea eliminar el producto?"}
                 functionShow={showModalTwo}
                 funtionClose={handleClose}
-                funtionOnClic={()=>{deleteProduct(selectProduct.id)}}
+                funtionOnClic={() => { deleteProduct(selectProduct.id) }}
             />
         </div>
     )
