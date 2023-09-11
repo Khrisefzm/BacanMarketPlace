@@ -49,7 +49,7 @@ export const Registro = () => {
                 .then(data => { return data })
                 .catch(error => console.log(error));
         } else {
-            console.log("las contraseñas no coinciden")
+            alert("las contraseñas no coinciden");
         }
     }
 
