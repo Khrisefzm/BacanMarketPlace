@@ -42,7 +42,6 @@ export const HistoryPage = () => {
         actions.seeProducts();
         if (id) {
             let newFilterProducts = store.products.filter(product => product.user_id == store.user.id && product.exchange_state === "pending" && product.id != id);
-            // let newFilterProducts = filterProducts.filter(product => product.id != id);
             setFilterProducts(newFilterProducts);
             actions.seeProducts();
         }
@@ -52,6 +51,11 @@ export const HistoryPage = () => {
     }
 
     const deleteProduct = (id) => {
+        if (id) {
+            let newFilterProducts = store.products.filter(product => product.id != id);
+            setFilterProducts(newFilterProducts);
+            actions.seeProducts();
+        }
         actions.deleteProduct(id);
         handleClose();
     }
