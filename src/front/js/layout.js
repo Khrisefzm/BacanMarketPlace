@@ -42,7 +42,6 @@ const Layout = () => {
                     <GeneralNavbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        {/* <Route element={<Demo />} path="/demo" /> */}
                         <Route element={<ResetPassword />} path="/ResetPassword" />
                         <Route element={<Password />} path="/password/:token" />
                         <Route element={<Login />} path="/login" />
@@ -56,7 +55,7 @@ const Layout = () => {
                         <Route element={<ContactPage />} path="/contactpage/:theid" />
                         <Route element={<PaymentPage />} path="/paymentpage" />
                         <Route element={<DatosUsuario />} path="/datosusuario" />
-                        <Route element={<EditUser/>} path="/edit-user" />
+                        <Route element={<EditUser />} path="/edit-user" />
                         <Route element={<HistoryPage />} path="/history" />
                         <Route element={<ProductInfo />} path="/product-info/:theid" />
                         <Route element={<EditProductForm />} path="/edit-product/:theid" />

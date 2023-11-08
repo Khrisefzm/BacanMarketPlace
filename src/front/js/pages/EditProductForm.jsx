@@ -6,19 +6,6 @@ export const EditProductForm = () => {
     const { store, actions } = useContext(Context);
     const params = useParams();
     const navigate = useNavigate();
-
-    //     name: store.singleProduct.name || "",
-    //     product_state: store.singleProduct.product_state || "",
-    //     category: store.singleProduct.category || "",
-    //     author: store.singleProduct.author || "",
-    //     description: store.singleProduct.description || "",
-    //     image: store.singleProduct.image || "",
-    //     interested_product_one: store.singleProduct.interested_product_one || "",
-    //     interested_product_two: store.singleProduct.interested_product_two || "",
-    //     interested_product_three: store.singleProduct.interested_product_three || "",
-    //     exchange_state: store.singleProduct.exchange_state || "",
-    //     user_id: store.user.id
-    // });
     useEffect(() => {
         actions.singleProduct(params.theid);
     }, []);

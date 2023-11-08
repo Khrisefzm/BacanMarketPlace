@@ -104,25 +104,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false
 				}
 			},
-			// seeActualUser: async (token) => { setear user con los datos que brinda el token
-			// 	try {
-			// 		const response = await fetch(process.env.BACKEND_URL + "/api/verifyemailtoken", {
-			// 			method: "GET",
-			// 			headers: {
-			// 				Authorization: "Bearer " + token,
-			// 			}
-			// 		});
-			// 		const data = await response.json();
-			// 		console.log(data);
-			// 		if (data == true) {
-			// 			return true
-			// 		}
-			// 		return false
-			// 	} catch (error) {
-			// 		console.log(error);
-			// 		return false
-			// 	}
-			// },
 			editUser: async (form) => {
 				const store = getStore();
 				try {
@@ -204,10 +185,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify(form)
 					});
 					const data = await response.json();
-					const index = store.products.findIndex(product => {product.id==id});
+					const index = store.products.findIndex(product => { product.id == id });
 					store.products[index] = data;
 					const newProducts = store.products;
-					setStore({ products: newProducts});
+					setStore({ products: newProducts });
 					setStore({ singleProduct: data });
 				} catch (error) {
 					console.log(error);
@@ -221,7 +202,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 					const data = await response.json();
 					const newProducts = store.products.filter(product => product.id != id);
-					setStore({ products: newProducts});
+					setStore({ products: newProducts });
 				} catch (error) {
 					console.log(error);
 				}
@@ -260,7 +241,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
 					const data = await resp.json()
 					setStore({ message: data.message })
-					// don't forget to return something, that is how the async resolves
 					return data;
 				} catch (error) {
 					console.log("Error loading message from backend", error)
@@ -270,13 +250,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//get the store
 				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
 				const demo = store.demo.map((elm, i) => {
 					if (i === index) elm.background = color;
 					return elm;
 				});
-
 				//reset the global store
 				setStore({ demo: demo });
 			},
@@ -288,7 +265,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify(form)
 					})
-					// if (!response.ok) throw("There was a problem in the login request")
 
 					if (response.status !== 200) {
 						alert("Hubo un error, por favor trate de nuevo más tarde")
